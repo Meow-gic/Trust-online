@@ -197,7 +197,7 @@
         <div class="result" id="result"></div>
     </div>
 
- <script>
+   <script>
         function calculateResults() {
             // 收集用户输入的数据
             const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
@@ -212,14 +212,14 @@
             document.getElementById('maxAvailableShares').value = maxAvailableShares;
 
             // 显示结果
-            const resultData = 
+            const resultData = `
                 應保留股數: ${retainedShares} 股<br>
                 最多可承做股數: ${maxAvailableShares} 股
-            ;
-            document.getElementById('result').innerHTML = 
+            `;
+            document.getElementById('result').innerHTML = `
                 <h2>結果彙總</h2>
                 <p>${resultData}</p>
-            ;
+            `;
         }
     function updateRetainedAndMaxShares() {
             const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
@@ -232,6 +232,11 @@
             // 计算最多可承做股数，公式：IF(I8-I6<0, 0, I8-I6)
             const maxAvailableShares = Math.max(0, currentHolding - retainedShares);
             document.getElementById('maxAvailableShares').value = maxAvailableShares;
+        }
+    </script>
+</body>
+</html>
+
         }
     </script>
 </body>
