@@ -257,6 +257,9 @@
         // 计算信托本金
         const trustPrincipal = trustShares * 1000 * stockPrice;
 
+        // 计算信托本金现值
+        const trustPrincipalPV = trustPrincipal / Math.pow(1 + 0.01725, trustYears);
+
         // 计算股利收入并乘以信托规划年数
         const annualDividendIncome = 
             Math.floor(trustShares * 1000 * futureEarningsShares / 10) * stockPrice +
@@ -265,7 +268,6 @@
 
         // 计算应缴赠与税，四舍五入到整数，若为负数则显示0
         const F5 = 2440000;
-        const trustPrincipalPV = trustPrincipal / Math.pow(1 + 0.01725, trustYears);
         const E5 = trustPrincipal - trustPrincipalPV;
         let giftTax = E5 - F5 > 0 ? Math.round(E5 - F5) : 0;
 
@@ -291,5 +293,6 @@
         document.getElementById('result').innerHTML = `<h2>查詢結果</h2>${resultData}`;
     }
 </script>
+
 </body>
 </html>
