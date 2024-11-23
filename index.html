@@ -1,1 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贈與稅試算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 95%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #e6f2ff;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            color: #333;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>信託線上申請</h1>
+
+        <!-- 区块1：信託規劃基本資料 -->
+        <div class="section">
+            <div class="section-title">信託規劃基本資料</div>
+            <form id="trustForm">
+                <label for="clientName">客戶姓名</label>
+                <input type="text" id="clientName" name="clientName" placeholder="輸入客戶姓名" required>
+
+                <label for="stockCode">交付股票代號</label>
+                <input type="text" id="stockCode" name="stockCode" placeholder="輸入股票代號" required>
+
+                <label for="stockPrice">股價</label>
+                <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
+
+                <label for="trustShares">交付信託張數</label>
+                <input type="number" id="trustShares" name="trustShares" placeholder="輸入信託張數" required>
+
+                <label for="trustYears">信託規劃年數</label>
+                <input type="number" id="trustYears" name="trustYears" placeholder="輸入信託年數" required>
+            </form>
+        </div>
+
+        <!-- 区块2：預估未來股價、配股配息 -->
+        <div class="section">
+            <div class="section-title">預估未來股價、配股配息</div>
+            <label for="futureStockPrice">預估未來股價</label>
+            <input type="number" id="futureStockPrice" name="futureStockPrice" placeholder="輸入預估未來股價" required>
+
+            <label for="futureEarningsShares">預估未來盈餘配股</label>
+            <input type="number" id="futureEarningsShares" name="futureEarningsShares" placeholder="輸入預估盈餘配股" required>
+
+            <label for="futureCashDividend">預估未來現金股利</label>
+            <input type="number" id="futureCashDividend" name="futureCashDividend" placeholder="輸入預估現金股利" required>
+        </div>
+
+        <!-- 区块3：內部人資訊 -->
+        <div class="section">
+            <div class="section-title">內部人資訊</div>
+            <label for="initialHolding">選任時持股</label>
+            <input type="number" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required>
+
+            <label for="retainedShares">應保留股數 (自動計算)</label>
+            <input type="number" id="retainedShares" name="retainedShares" readonly>
+
+            <label for="currentHolding">目前持有股數</label>
+            <input type="number" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required>
+
+            <label for="maxAvailableShares">最多可承做股數 (自動計算)</label>
+            <input type="number" id="maxAvailableShares" name="maxAvailableShares" readonly>
+        </div>
+
+        <!-- 提交按钮 -->
+        <button type="button" onclick="calculateResults()">送出資料</button>
+        
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateResults() {
+            // 收集用户输入的数据
+            const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
+            const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
+
+            // 计算应保留股数，公式：IF(ISBLANK(I4), 0, ROUND(I4/2+1, 0))
+            const retainedShares = initialHolding ? Math.round(initialHolding / 2 + 1) : 0;
+            document.getElementById('retainedShares').value = retainedShares;
+
+            // 计算最多可承做股数，公式：IF(I8-I6<0, 0, I8-I6)
+            const maxAvailableShares = Math.max(0, currentHolding - retainedShares);
+            document.getElementById('maxAvailableShares').value = maxAvailableShares;
+
+            // 显示结果
+            const resultData = `
+                應保留股數: ${retainedShares} 股<br>
+                最多可承做股數: ${maxAvailableShares} 股
+            `;
+            document.getElementById('result').innerHTML = `
+                <h2>結果彙總</h2>
+                <p>${resultData}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
 
