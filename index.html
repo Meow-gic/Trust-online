@@ -259,7 +259,26 @@
 
             // 计算股利收入
             const dividendIncomePerYear = Math.floor(trustShares * 1000 * futureEarningsShares / 10) * stockPrice + Math.floor(trustShares * 1000 * futureCashDividend);
-            $1const giftTax = totalDividendIncome < 0 ? 0 : totalDividendIncome;
+            const totalDividendIncome = dividendIncomePerYear * trustYears;
+            const giftTax = totalDividendIncome < 0 ? 0 : totalDividendIncome;
+
+            // 显示结果
+            const resultData = `
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr style="background-color: #D9EAF7;">
+                        <td style="padding: 10px; font-weight: bold;">信託本金</td>
+                        <td style="padding: 10px;">${trustPrincipal.toLocaleString()} 元</td>
+                    </tr>
+                    <tr style="background-color: #D9EAF7;">
+                        <td style="padding: 10px; font-weight: bold;">股利收入</td>
+                        <td style="padding: 10px;">${totalDividendIncome.toLocaleString()} 元</td>
+                    </tr>
+                    <tr style="background-color: #e55347; color: #FFFFFF;">
+                        <td colspan="2" style="padding: 15px; text-align: center; font-weight: bold;">最多可省下 ${giftTax.toLocaleString()} 元</td>
+                    </tr>
+                </table>`;
+            document.getElementById('result').innerHTML = `<h2>查詢結果</h2>${resultData}`;
+        }
 
             // 显示结果
             const resultData = `
