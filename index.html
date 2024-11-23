@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #FFDEE9, #B5FFFC); /* 渐变背景 */
+            background: linear-gradient(135deg, #FF6347, #FFE4E1); /* Pomodoro Timer 渐变背景 */
             padding: 0;
             margin: 0;
             display: flex;
@@ -23,6 +23,7 @@
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin: 20px;
+            overflow: hidden;
         }
         h1 {
             text-align: center;
@@ -32,20 +33,40 @@
         .section {
             margin-bottom: 20px;
             padding: 15px;
-            border: 1px solid #ccc;
             border-radius: 5px;
-            background-color: #f0f8ff;
+        }
+        .section:nth-child(1) {
+            background-color: #FFEFD5;
+            border: 1px solid #FFA07A;
+        }
+        .section:nth-child(2) {
+            background-color: #E6E6FA;
+            border: 1px solid #9370DB;
+        }
+        .section:nth-child(3) {
+            background-color: #FFFACD;
+            border: 1px solid #FFD700;
         }
         .section-title {
             font-weight: bold;
             color: #333;
             margin-bottom: 10px;
+            font-size: 18px;
+            text-align: center;
+            background-color: #FFDAB9;
+            padding: 5px;
+            border-radius: 4px;
         }
         label {
             display: block;
             margin: 10px 0 5px;
             font-weight: bold;
             color: #333;
+        }
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
         }
         input[type="text"], input[type="number"] {
             width: 100%;
@@ -54,6 +75,7 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 14px;
+            box-sizing: border-box;
         }
         button {
             width: 100%;
@@ -84,6 +106,9 @@
             button {
                 padding: 10px;
             }
+            .input-group {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -98,11 +123,20 @@
                 <label for="clientName">客戶姓名</label>
                 <input type="text" id="clientName" name="clientName" placeholder="輸入客戶姓名" required>
 
-                <label for="stockCode">交付股票代號</label>
-                <input type="text" id="stockCode" name="stockCode" placeholder="輸入股票代號" required>
-
-                <label for="stockPrice">股價</label>
-                <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
+                <div class="input-group">
+                    <div style="flex: 1;">
+                        <label for="stockCode">交付股票代號</label>
+                        <input type="text" id="stockCode" name="stockCode" placeholder="輸入股票代號" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="stockPrice">股價</label>
+                        <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
+                    </div>
+                    <div>
+                        <label>&nbsp;</label>
+                        <button type="button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢股價</button>
+                    </div>
+                </div>
 
                 <label for="trustShares">交付信託張數</label>
                 <input type="number" id="trustShares" name="trustShares" placeholder="輸入信託張數" required>
