@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #FF6347, #FFE4E1); /* Pomodoro Timer 渐变背景 */
+            background: linear-gradient(135deg, #FFFEFE, #D6BCA3); /* Pomodoro Timer 渐变背景 */
             padding: 0;
             margin: 0;
             display: flex;
@@ -36,25 +36,25 @@
             border-radius: 5px;
         }
         .section:nth-child(1) {
-            background-color: #FFDAB9;
-            border: 1px solid #FFA07A;
+            background-color: #FFFEFE;
+            border: 1px solid #3C686E;
         }
         .section:nth-child(2) {
-            background-color: #E0BBE4;
-            border: 1px solid #957DAD;
+            background-color: #3C686E;
+            border: 1px solid #262216;
         }
         .section:nth-child(3) {
-            background-color: #FFDFD3;
-            border: 1px solid #FFB6B9;
+            background-color: #E94B25;
+            border: 1px solid #262216;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
         .section-title {
             font-weight: bold;
-            color: #333;
+            color: #262216;
             margin-bottom: 10px;
             font-size: 20px;
             text-align: center;
-            background-color: #FFA07A;
+            background-color: #D6BCA3;
             padding: 10px;
             border-radius: 5px;
         }
@@ -172,7 +172,7 @@
                 <div class="input-group">
                     <div style="flex: 1;">
                         <label for="initialHolding">選任時持股</label>
-                        <input type="number" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required>
+                        <input type="number" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required oninput="updateRetainedAndMaxShares()">
                     </div>
                     <div style="flex: 1;">
                         <label for="retainedShares">應保留股數 (自動計算)</label>
@@ -183,7 +183,7 @@
                 <div class="input-group">
                     <div style="flex: 1;">
                         <label for="currentHolding">目前持有股數</label>
-                        <input type="number" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required>
+                        <input type="number" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required oninput="updateRetainedAndMaxShares()">
                     </div>
                     <div style="flex: 1;">
                         <label for="maxAvailableShares">最多可承做股數 (自動計算)</label>
@@ -222,6 +222,18 @@
                 <h2>結果彙總</h2>
                 <p>${resultData}</p>
             `;
+        }
+    function updateRetainedAndMaxShares() {
+            const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
+            const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
+
+            // 计算应保留股数，公式：IF(ISBLANK(I4), 0, ROUND(I4/2+1, 0))
+            const retainedShares = initialHolding ? Math.round(initialHolding / 2 + 1) : 0;
+            document.getElementById('retainedShares').value = retainedShares;
+
+            // 计算最多可承做股数，公式：IF(I8-I6<0, 0, I8-I6)
+            const maxAvailableShares = Math.max(0, currentHolding - retainedShares);
+            document.getElementById('maxAvailableShares').value = maxAvailableShares;
         }
     </script>
 </body>
