@@ -214,13 +214,35 @@
         
         <!-- 獨立的送出資料按鈕 -->
         <div class="button-group">
-            <button type="button" onclick="calculateResults()">送出資料</button>
+            <button type="button" onclick="validateAndCalculateResults()">送出資料</button>
         </div>
 
         <div class="result" id="result"></div>
     </div>
 
  <script>
+        function validateAndCalculateResults() {
+            const requiredFields = [
+                { id: 'trustShares', name: '交付信託張數' },
+                { id: 'trustYears', name: '信託規劃年數' },
+                { id: 'stockCode', name: '交付股票代號' },
+                { id: 'stockPrice', name: '股價' },
+                { id: 'futureStockPrice', name: '預估未來股價' },
+                { id: 'futureEarningsShares', name: '預估未來盈餘配股' },
+                { id: 'futureCashDividend', name: '預估未來現金股利' }
+            ];
+
+            for (let field of requiredFields) {
+                const value = document.getElementById(field.id).value;
+                if (!value) {
+                    alert(`請填寫 ${field.name}`);
+                    return;
+                }
+            }
+
+            calculateResults();
+        }
+
         function calculateResults() {
             // 收集用户输入的数据
             const trustShares = parseFloat(document.getElementById('trustShares').value) || 0;
