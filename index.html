@@ -66,6 +66,7 @@
             box-sizing: border-box;
         }
         button {
+            width: 100%; /* 使送出按鈕變大 */
             padding: 12px;
             background-color: #4CAF50;
             color: white;
@@ -99,7 +100,7 @@
                 padding: 10px;
             }
             .input-group {
-                flex-direction: row; /* 改變方向確保按鈕在輸入框後面 */
+                flex-direction: column; /* 確保查詢股價按鈕排列在輸入框後面 */
             }
         }
     </style>
@@ -124,8 +125,9 @@
                         <label for="stockPrice">股價</label>
                         <input type="text" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
                     </div>
-                    <div style="align-self: flex-end;">
-                        <button type="button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢</button>
+                    <div>
+                        <label>&nbsp;</label>
+                        <button type="button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢股價</button>
                     </div>
                 </div>
 
@@ -209,4 +211,4 @@
 
             // 显示结果
             const resultData = `
-                應保[_{{{CITATION{{{_1{](https://github.com/lzh-yi/Web-Fork-/tree/024b3e55587afdf9f05a677613a75f24e3d1803e/03-CSS%E8%BF%9B%E9%98%B6%2F04-%E5%A6%82%E4%BD%95%E8%AE%A9%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%EF%BC%9F.md)
+                應保留股數: ${retainedShares} 股<br>
