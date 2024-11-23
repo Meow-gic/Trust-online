@@ -105,12 +105,15 @@
             margin-top: 20px;
             text-align: center;
             color: #333;
-            font-size: 16px;
+            font-size: 18px;
         }
         .button-group {
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
+        }
+        table {
+            font-size: 18px;
         }
         @media (max-width: 768px) {
             h1 {
@@ -265,17 +268,9 @@
                         <td style="padding: 10px; font-weight: bold;">信託本金</td>
                         <td style="padding: 10px;">${trustPrincipal.toLocaleString()} 元</td>
                     </tr>
-                    <tr style="background-color: #F5F5F5;">
-                        <td style="padding: 10px; font-weight: bold;">信託期間</td>
-                        <td style="padding: 10px;">${trustYears} 年</td>
-                    </tr>
                     <tr style="background-color: #D9EAF7;">
                         <td style="padding: 10px; font-weight: bold;">股利收入</td>
                         <td style="padding: 10px;">${totalDividendIncome.toLocaleString()} 元</td>
-                    </tr>
-                    <tr style="background-color: #F5F5F5;">
-                        <td style="padding: 10px; font-weight: bold;">應繳贈與稅</td>
-                        <td style="padding: 10px;">-${totalDividendIncome.toLocaleString()} 元</td>
                     </tr>
                     <tr style="background-color: #e55347; color: #FFFFFF;">
                         <td colspan="2" style="padding: 15px; text-align: center; font-weight: bold;">最多可省下 ${totalDividendIncome.toLocaleString()} 元</td>
