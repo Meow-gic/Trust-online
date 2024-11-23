@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #FFFEFE, #D6BCA3); /* Pomodoro Timer 渐变背景 */
+            background: linear-gradient(135deg, #CEB1AB, #DBB6C6); /* Pomodoro Timer 渐变背景 */
             padding: 0;
             margin: 0;
             display: flex;
@@ -36,16 +36,17 @@
             border-radius: 5px;
         }
         .section:nth-child(1) {
-            background-color: #FFFEFE;
-            border: 1px solid #3C686E;
+            background-color: #CEB1AB;
+            border: 1px solid #6388E2;
         }
         .section:nth-child(2) {
-            background-color: #3C686E;
-            border: 1px solid #262216;
+            background-color: #F0B859;
+            border: 1px solid #6388E2;
         }
         .section:nth-child(3) {
-            background-color: #E94B25;
-            border: 1px solid #262216;
+            background-color: #ED75C0;
+            border: 1px solid #6388E2;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
         .section-title {
@@ -54,7 +55,7 @@
             margin-bottom: 10px;
             font-size: 20px;
             text-align: center;
-            background-color: #D6BCA3;
+            background-color: #DBB6C6;
             padding: 10px;
             border-radius: 5px;
         }
@@ -168,7 +169,7 @@
         <!-- 区块3：內部人資訊 -->
         <div class="section">
             <div class="section-title">內部人資訊</div>
-            <div style="border: 1px solid #FFD700; padding: 15px; border-radius: 5px;">
+            
                 <div class="input-group">
                     <div style="flex: 1;">
                         <label for="initialHolding">選任時持股</label>
@@ -190,7 +191,6 @@
                         <input type="number" id="maxAvailableShares" name="maxAvailableShares" readonly>
                     </div>
                 </div>
-            </div>
             <div class="button-group">
                 <button type="button" onclick="calculateResults()">送出資料</button>
             </div>
