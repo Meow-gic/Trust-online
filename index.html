@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #FF6347, #FFE4E1); /* Pomodoro Timer 渐变背景 */
+            background: linear-gradient(135deg, #FD5E53, #FFD1C1); /* Pomodoro Timer 渐变背景 */
             padding: 0;
             margin: 0;
             display: flex;
@@ -21,9 +21,9 @@
             background: rgba(255, 255, 255, 0.95);
             border-radius: 10px;
             padding: 20px;
-             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin: 20px;
- 
+        }
         h1 {
             text-align: center;
             color: #333;
@@ -33,18 +33,7 @@
             margin-bottom: 20px;
             padding: 15px;
             border-radius: 5px;
-        }
-        .section:nth-child(1) {
-            background-color: #FF6347;
-        }
-        .section:nth-child(2) {
-            background-color: #FF6347;
-        }
-        .section:nth-child(3) {
-            background-color: #FF6347;
-            border: 1px solid #6388E2;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            background-color: #FFD1C1; /* 新的 section 背景色 */
         }
         .section-title {
             font-weight: bold;
@@ -219,30 +208,4 @@
 
             // 计算最多可承做股数，公式：IF(I8-I6<0, 0, I8-I6)
             const maxAvailableShares = Math.max(0, currentHolding - retainedShares);
-            document.getElementById('maxAvailableShares').value = maxAvailableShares;
-
-            // 显示结果
-            const resultData = `
-                應保留股數: ${retainedShares} 股<br>
-                最多可承做股數: ${maxAvailableShares} 股
-            `;
-            document.getElementById('result').innerHTML = `
-                <h2>結果彙總</h2>
-                <p>${resultData}</p>
-            `;
-        }
-    function updateRetainedAndMaxShares() {
-            const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
-            const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
-
-            // 计算应保留股数，公式：IF(ISBLANK(I4), 0, ROUND(I4/2+1, 0))
-            const retainedShares = initialHolding ? Math.round(initialHolding / 2 + 1) : 0;
-            document.getElementById('retainedShares').value = retainedShares;
-
-            // 计算最多可承做股数，公式：IF(I8-I6<0, 0, I8-I6)
-            const maxAvailableShares = Math.max(0, currentHolding - retainedShares);
-            document.getElementById('maxAvailableShares').value = maxAvailableShares;
-        }
-    </script>
-</body>
-</html>
+            document.getElementById('
