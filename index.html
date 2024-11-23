@@ -118,6 +118,17 @@
 
                 <div class="input-group">
                     <div style="flex: 1;">
+                        <label for="trustShares">交付信託張數</label>
+                        <input type="text" id="trustShares" name="trustShares" placeholder="輸入信託張數" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="trustYears">信託規劃年數</label>
+                        <input type="text" id="trustYears" name="trustYears" placeholder="輸入信託年數" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div style="flex: 1;">
                         <label for="stockCode">交付股票代號</label>
                         <input type="text" id="stockCode" name="stockCode" placeholder="輸入股票代號" required>
                     </div>
@@ -128,17 +139,6 @@
                     <div>
                         <label>&nbsp;</label>
                         <button type="button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢股價</button>
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <div style="flex: 1;">
-                        <label for="trustShares">交付信託張數</label>
-                        <input type="text" id="trustShares" name="trustShares" placeholder="輸入信託張數" required>
-                    </div>
-                    <div style="flex: 1;">
-                        <label for="trustYears">信託規劃年數</label>
-                        <input type="text" id="trustYears" name="trustYears" placeholder="輸入信託年數" required>
                     </div>
                 </div>
             </form>
@@ -187,11 +187,13 @@
                     <input type="number" id="maxAvailableShares" name="maxAvailableShares" readonly>
                 </div>
             </div>
-            <div class="button-group">
-                <button type="button" onclick="calculateResults()">送出資料</button>
-            </div>
         </div>
         
+        <!-- 獨立的送出資料按鈕 -->
+        <div class="button-group">
+            <button type="button" onclick="calculateResults()">送出資料</button>
+        </div>
+
         <div class="result" id="result"></div>
     </div>
 
@@ -203,8 +205,4 @@
 
             // 计算应保留股数，公式：IF(ISBLANK(I4), 0, ROUND(I4/2+1, 0))
             const retainedShares = initialHolding ? Math.round(initialHolding / 2 + 1) : 0;
-            document.getElementById('retainedShares').value = retainedShares;
-
-            // 计算最多可承做股数，公式：IF(I8-I6<0, 0, I8-I6)
-            const maxAvailableShares = Math.max(0, currentHolding - retainedShares);
-            document.getElement[_{{{CITATION{{{_1{](https://github.com/lzh-yi/Web-Fork-/tree/024b3e55587afdf9f05a677613a75f24e3d1803e/03-CSS%E8%BF%9B%E9%98%B6%2F04-%E5%A6%82%E4%BD%95%E8%AE%A9%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%EF%BC%9F.md)
+            document.getElement
