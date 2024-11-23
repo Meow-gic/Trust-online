@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #FD5E53, #FFD1C1); /* Pomodoro Timer 渐变背景 */
+            background: #f5f5f5; /* 新的背景色 */
             padding: 0;
             margin: 0;
             display: flex;
@@ -37,7 +37,7 @@
         }
         .section-title {
             font-weight: bold;
-            color: #262216;
+            color: #FF6347; /* 修改標題顏色 */
             margin-bottom: 10px;
             font-size: 20px;
             text-align: center;
@@ -62,7 +62,7 @@
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            font-size: 14px;
+            font-size: 16px; /* 增大輸入文字的大小 */
             box-sizing: border-box;
         }
         button {
@@ -99,7 +99,7 @@
                 padding: 10px;
             }
             .input-group {
-                flex-direction: column;
+                flex-direction: row; /* 改變方向確保按鈕在輸入框後面 */
             }
         }
     </style>
@@ -108,7 +108,7 @@
     <div class="container">
         <h1>有價證券信託試算表 (本金自益孳息他益)</h1>
 
-        <!-- 区块1：信託規劃基本資料 -->
+        <!-- 信託規劃基本資料 -->
         <div class="section">
             <div class="section-title">信託規劃基本資料</div>
             <form id="trustForm">
@@ -142,7 +142,7 @@
             </form>
         </div>
 
-        <!-- 区块2：預估未來股價、配股配息 -->
+        <!-- 預估未來股價、配股配息 -->
         <div class="section">
             <div class="section-title">預估未來股價、配股配息</div>
             <div class="input-group">
@@ -161,31 +161,30 @@
             </div>
         </div>
 
-        <!-- 区块3：內部人資訊 -->
+        <!-- 內部人資訊 -->
         <div class="section">
             <div class="section-title">內部人資訊</div>
-            
-                <div class="input-group">
-                    <div style="flex: 1;">
-                        <label for="initialHolding">選任時持股</label>
-                        <input type="text" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required oninput="updateRetainedAndMaxShares()">
-                    </div>
-                    <div style="flex: 1;">
-                        <label for="retainedShares">應保留股數 (自動計算)</label>
-                        <input type="number" id="retainedShares" name="retainedShares" readonly>
-                    </div>
+            <div class="input-group">
+                <div style="flex: 1;">
+                    <label for="initialHolding">選任時持股</label>
+                    <input type="text" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required oninput="updateRetainedAndMaxShares()">
                 </div>
+                <div style="flex: 1;">
+                    <label for="retainedShares">應保留股數 (自動計算)</label>
+                    <input type="number" id="retainedShares" name="retainedShares" readonly>
+                </div>
+            </div>
 
-                <div class="input-group">
-                    <div style="flex: 1;">
-                        <label for="currentHolding">目前持有股數</label>
-                        <input type="text" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required oninput="updateRetainedAndMaxShares()">
-                    </div>
-                    <div style="flex: 1;">
-                        <label for="maxAvailableShares">最多可承做股數 (自動計算)</label>
-                        <input type="number" id="maxAvailableShares" name="maxAvailableShares" readonly>
-                    </div>
+            <div class="input-group">
+                <div style="flex: 1;">
+                    <label for="currentHolding">目前持有股數</label>
+                    <input type="text" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required oninput="updateRetainedAndMaxShares()">
                 </div>
+                <div style="flex: 1;">
+                    <label for="maxAvailableShares">最多可承做股數 (自動計算)</label>
+                    <input type="number" id="maxAvailableShares" name="maxAvailableShares" readonly>
+                </div>
+            </div>
             <div class="button-group">
                 <button type="button" onclick="calculateResults()">送出資料</button>
             </div>
@@ -202,8 +201,4 @@
 
             // 计算应保留股数，公式：IF(ISBLANK(I4), 0, ROUND(I4/2+1, 0))
             const retainedShares = initialHolding ? Math.round(initialHolding / 2 + 1) : 0;
-            document.getElementById('retainedShares').value = retainedShares;
-
-            // 计算最多可承做股数，公式：IF(I8-I6<0, 0, I8-I6)
-            const maxAvailableShares = Math.max(0, currentHolding - retainedShares);
-            document.getElementById('maxAvailableShares').value =[_{{{CITATION{{{_1{](https://github.com/lzh-yi/Web-Fork-/tree/024b3e55587afdf9f05a677613a75f24e3d1803e/03-CSS%E8%BF%9B%E9%98%B6%2F04-%E5%A6%82%E4%BD%95%E8%AE%A9%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%EF%BC%9F.md)
+            document.getElementById('retainedShares').value[_{{{CITATION{{{_1{](https://github.com/lzh-yi/Web-Fork-/tree/024b3e55587afdf9f05a677613a75f24e3d1803e/03-CSS%E8%BF%9B%E9%98%B6%2F04-%E5%A6%82%E4%BD%95%E8%AE%A9%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%EF%BC%9F.md)
