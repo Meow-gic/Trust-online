@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>贈與稅試算表</title>
+    <title>有價證券信託試算表 (本金自益孳息他益)</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #CEB1AB, #DBB6C6); /* Pomodoro Timer 渐变背景 */
+            background: linear-gradient(135deg, #FF6347, #FFE4E1); /* Pomodoro Timer 渐变背景 */
             padding: 0;
             margin: 0;
             display: flex;
@@ -36,15 +36,15 @@
             border-radius: 5px;
         }
         .section:nth-child(1) {
-            background-color: #CEB1AB;
+            background-color: #FF6347;
             border: 1px solid #6388E2;
         }
         .section:nth-child(2) {
-            background-color: #F0B859;
+            background-color: #FF6347;
             border: 1px solid #6388E2;
         }
         .section:nth-child(3) {
-            background-color: #ED75C0;
+            background-color: #FF6347;
             border: 1px solid #6388E2;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -55,7 +55,7 @@
             margin-bottom: 10px;
             font-size: 20px;
             text-align: center;
-            background-color: #DBB6C6;
+            background-color: #FFE4E1;
             padding: 10px;
             border-radius: 5px;
         }
@@ -121,7 +121,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>贈與稅試算表</h1>
+        <h1>有價證券信託試算表 (本金自益孳息他益)</h1>
 
         <!-- 区块1：信託規劃基本資料 -->
         <div class="section">
@@ -137,7 +137,7 @@
                     </div>
                     <div style="flex: 1;">
                         <label for="stockPrice">股價</label>
-                        <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
+                        <input type="text" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
                     </div>
                     <div>
                         <label>&nbsp;</label>
