@@ -264,9 +264,10 @@
         const trustPrincipalPV = trustPrincipal / Math.pow(1 + 0.01725, trustYears);
 
         // 计算股利收入
-        const dividendIncome = 
+        const annualDividendIncome = 
             Math.floor(trustShares * 1000 * futureEarningsShares / 10) * stockPrice +
             Math.floor(trustShares * 1000 * futureCashDividend);
+        const totalDividendIncome = annualDividendIncome * trustYears;
 
         // 计算應繳贈與稅 (E5 - F5)
         const F5 = 2440000;
