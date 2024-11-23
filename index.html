@@ -36,26 +36,27 @@
             border-radius: 5px;
         }
         .section:nth-child(1) {
-            background-color: #FFEFD5;
+            background-color: #FFDAB9;
             border: 1px solid #FFA07A;
         }
         .section:nth-child(2) {
-            background-color: #E6E6FA;
-            border: 1px solid #9370DB;
+            background-color: #E0BBE4;
+            border: 1px solid #957DAD;
         }
         .section:nth-child(3) {
-            background-color: #FFFACD;
-            border: 1px solid #FFD700;
+            background-color: #FFDFD3;
+            border: 1px solid #FFB6B9;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
         .section-title {
             font-weight: bold;
             color: #333;
             margin-bottom: 10px;
-            font-size: 18px;
+            font-size: 20px;
             text-align: center;
-            background-color: #FFDAB9;
-            padding: 5px;
-            border-radius: 4px;
+            background-color: #FFA07A;
+            padding: 10px;
+            border-radius: 5px;
         }
         label {
             display: block;
@@ -95,6 +96,11 @@
             text-align: center;
             color: #333;
             font-size: 16px;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
         }
         @media (max-width: 768px) {
             h1 {
@@ -162,21 +168,33 @@
         <!-- 区块3：內部人資訊 -->
         <div class="section">
             <div class="section-title">內部人資訊</div>
-            <label for="initialHolding">選任時持股</label>
-            <input type="number" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required>
+            <div style="border: 1px solid #FFD700; padding: 15px; border-radius: 5px;">
+                <div class="input-group">
+                    <div style="flex: 1;">
+                        <label for="initialHolding">選任時持股</label>
+                        <input type="number" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="retainedShares">應保留股數 (自動計算)</label>
+                        <input type="number" id="retainedShares" name="retainedShares" readonly>
+                    </div>
+                </div>
 
-            <label for="retainedShares">應保留股數 (自動計算)</label>
-            <input type="number" id="retainedShares" name="retainedShares" readonly>
-
-            <label for="currentHolding">目前持有股數</label>
-            <input type="number" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required>
-
-            <label for="maxAvailableShares">最多可承做股數 (自動計算)</label>
-            <input type="number" id="maxAvailableShares" name="maxAvailableShares" readonly>
+                <div class="input-group">
+                    <div style="flex: 1;">
+                        <label for="currentHolding">目前持有股數</label>
+                        <input type="number" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="maxAvailableShares">最多可承做股數 (自動計算)</label>
+                        <input type="number" id="maxAvailableShares" name="maxAvailableShares" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="button-group">
+                <button type="button" onclick="calculateResults()">送出資料</button>
+            </div>
         </div>
-
-        <!-- 提交按钮 -->
-        <button type="button" onclick="calculateResults()">送出資料</button>
         
         <div class="result" id="result"></div>
     </div>
