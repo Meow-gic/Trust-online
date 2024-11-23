@@ -216,55 +216,60 @@
         </div>
         
         <!-- 獨立的送出資料按鈕 -->
-       <div class="button-group">
+<div class="button-group">
+    <!-- 确保按钮有唯一 ID -->
     <button type="button" id="submitButton">送出資料</button>
 </div>
 
 <div class="result" id="result"></div>
 
 <script>
+    // 确保按钮点击事件绑定正确
+    document.getElementById("submitButton").addEventListener("click", validateAndCalculateResults);
+
     function validateAndCalculateResults() {
         const requiredFields = [
             { id: 'trustShares', name: '交付信託張數' },
             { id: 'trustYears', name: '信託規劃年數' },
-            { id: 'stockCode', name: '交付股票代號' },
             { id: 'stockPrice', name: '股價' },
             { id: 'futureEarningsShares', name: '預估未來盈餘配股' },
             { id: 'futureCashDividend', name: '預估未來現金股利' }
         ];
 
+        // 验证必填字段是否已填写
         for (let field of requiredFields) {
-            const value = document.getElementById(field.id).value;
+            const value = document.getElementById(field.id)?.value;
             if (!value) {
                 alert(`請填寫 ${field.name}`);
                 return;
             }
         }
 
+        // 所有字段填写完成后，执行计算
         calculateResults();
     }
 
     function calculateResults() {
-        // 收集用户输入的数据
+        // 获取用户输入的值
         const trustShares = parseFloat(document.getElementById('trustShares').value) || 0;
         const trustYears = parseFloat(document.getElementById('trustYears').value) || 0;
         const stockPrice = parseFloat(document.getElementById('stockPrice').value) || 0;
         const futureEarningsShares = parseFloat(document.getElementById('futureEarningsShares').value) || 0;
         const futureCashDividend = parseFloat(document.getElementById('futureCashDividend').value) || 0;
 
-        // 计算信託本金
+        // 计算信托本金
         const trustPrincipal = trustShares * 1000 * stockPrice;
 
-        // 计算信託本金現值
+        // 计算信托本金现值
         const trustPrincipalPV = trustPrincipal / Math.pow(1 + 0.01725, trustYears);
 
-        // 计算股利收入，乘以信託規劃年數
+        // 计算股利收入并乘以信托规划年数
         const annualDividendIncome = 
             Math.floor(trustShares * 1000 * futureEarningsShares / 10) * stockPrice +
             Math.floor(trustShares * 1000 * futureCashDividend);
         const totalDividendIncome = annualDividendIncome * trustYears;
 
-        // 计算應繳贈與稅 (E5 - F5)
+        // 计算应缴赠与税
         const F5 = 2440000;
         const E5 = trustPrincipal - trustPrincipalPV;
         let giftTax;
