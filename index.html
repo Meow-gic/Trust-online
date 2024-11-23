@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #9CD9DF; /* 新的背景色 */
+            background: #9CD9DF;
             padding: 0;
             margin: 0;
             display: flex;
@@ -36,7 +36,7 @@
         }
         .section-title {
             font-weight: bold;
-            color: #FFFFFF; /* 修改標題顏色 */
+            color: #FFFFFF;
             margin-bottom: 10px;
             font-size: 20px;
             text-align: center;
@@ -46,26 +46,26 @@
 
         /* 信託規劃基本資料區塊 */
         .section:nth-of-type(1) {
-            background-color: #FFD1C1; /* 修改 section 背景色 */
+            background-color: #FFD1C1;
         }
         .section:nth-of-type(1) .section-title {
-            background-color: #e55347; /* 修改標題背景色 */
+            background-color: #e55347;
         }
 
         /* 預估未來股價、配股配息區塊 */
         .section:nth-of-type(2) {
-            background-color: #FFD1C1; /* 修改 section 背景色 */
+            background-color: #FFD1C1;
         }
         .section:nth-of-type(2) .section-title {
-            background-color: #e55347; /* 修改標題背景色 */
+            background-color: #e55347;
         }
 
         /* 內部人資訊區塊 */
         .section:nth-of-type(3) {
-            background-color: #D9EAF7; /* 更改內部人資訊區塊背景色 */
+            background-color: #D9EAF7;
         }
         .section:nth-of-type(3) .section-title {
-            background-color: #5F97D1; /* 更改內部人資訊區塊標題背景色 */
+            background-color: #5F97D1;
         }
 
         label {
@@ -85,11 +85,11 @@
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            font-size: 16px; /* 增大輸入文字的大小 */
+            font-size: 16px;
             box-sizing: border-box;
         }
         button {
-            width: 100%; /* 使送出按鈕變大 */
+            width: 100%;
             padding: 12px;
             background-color: #4CAF50;
             color: white;
@@ -123,7 +123,7 @@
                 padding: 10px;
             }
             .input-group {
-                flex-direction: column; /* 確保查詢股價按鈕排列在輸入框後面 */
+                flex-direction: column;
             }
         }
     </style>
@@ -223,21 +223,45 @@
  <script>
         function calculateResults() {
             // 收集用户输入的数据
-            const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
-            const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
+            const trustShares = parseFloat(document.getElementById('trustShares').value) || 0;
+            const trustYears = parseFloat(document.getElementById('trustYears').value) || 0;
+            const stockPrice = parseFloat(document.getElementById('stockPrice').value) || 0;
+            const futureEarningsShares = parseFloat(document.getElementById('futureEarningsShares').value) || 0;
+            const futureCashDividend = parseFloat(document.getElementById('futureCashDividend').value) || 0;
 
-            // 计算应保留股数，公式：IF(ISBLANK(I4), 0, ROUND(I4/2+1, 0))
-            const retainedShares = initialHolding ? Math.round(initialHolding / 2 + 1) : 0;
-            document.getElementById('retainedShares').value = retainedShares;
+            // 计算信託本金
+            const trustPrincipal = trustShares * 1000 * stockPrice;
 
-            // 计算最多可承做股数，公式：IF(I8-I6<0, 0, I8-I6)
-            const maxAvailableShares = Math.max(0, currentHolding - retainedShares);
-            document.getElementById('maxAvailableShares').value = maxAvailableShares;
+            // 计算股利收入
+            const dividendIncomePerYear = Math.floor(trustShares * 1000 * futureEarningsShares / 10) * stockPrice + Math.floor(trustShares * 1000 * futureCashDividend);
+            const totalDividendIncome = dividendIncomePerYear * trustYears;
 
             // 显示结果
-            const resultData = `應保留股數: ${retainedShares} 股<br>最多可承做股數: ${maxAvailableShares} 股`;
-            document.getElementById('result').innerHTML = `<h2>結果彙總</h2><p>${resultData}</p>`;
+            const resultData = `
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr style="background-color: #D9EAF7;">
+                        <td style="padding: 10px; font-weight: bold;">信託本金</td>
+                        <td style="padding: 10px;">${trustPrincipal.toLocaleString()} 元</td>
+                    </tr>
+                    <tr style="background-color: #F5F5F5;">
+                        <td style="padding: 10px; font-weight: bold;">信託期間</td>
+                        <td style="padding: 10px;">${trustYears} 年</td>
+                    </tr>
+                    <tr style="background-color: #D9EAF7;">
+                        <td style="padding: 10px; font-weight: bold;">股利收入</td>
+                        <td style="padding: 10px;">${totalDividendIncome.toLocaleString()} 元</td>
+                    </tr>
+                    <tr style="background-color: #F5F5F5;">
+                        <td style="padding: 10px; font-weight: bold;">應繳贈與稅</td>
+                        <td style="padding: 10px;">-${totalDividendIncome.toLocaleString()} 元</td>
+                    </tr>
+                    <tr style="background-color: #e55347; color: #FFFFFF;">
+                        <td colspan="2" style="padding: 15px; text-align: center; font-weight: bold;">最多可省下 ${totalDividendIncome.toLocaleString()} 元</td>
+                    </tr>
+                </table>`;
+            document.getElementById('result').innerHTML = `<h2>查詢結果</h2>${resultData}`;
         }
+
     function updateRetainedAndMaxShares() {
             const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
             const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
