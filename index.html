@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>有價證券信託試算表 (本金自益 孳息他益)</title>
+    <title>有價證券信託試算表 (本金自益孳息他益)</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #A1BAB0; /* 新的背景色 */
+            background: #A1BAB0;
             padding: 0;
             margin: 0;
             display: flex;
@@ -28,7 +28,7 @@
             text-align: center;
             color: #333;
             margin-bottom: 20px;
-            font-size: 24px; /* 字體小一號 */
+            font-size: 24px;
         }
         .section {
             margin-bottom: 20px;
@@ -87,31 +87,28 @@
             justify-content: space-between;
             margin-top: 20px;
         }
-
         /* 內部人資訊區塊配色 */
         .section.internal {
             background-color: #E4F0FC; /* 淺藍背景 */
             border: 2px solid #5F97D1; /* 深藍邊框 */
         }
         .section.internal .section-title {
-            background-color: #5F97D1; /* 深藍標題背景 */
+            background-color: #5F97D1;
             color: white;
-            font-size: 20px;
         }
         .section.internal label {
             color: #2C5E91; /* 深藍字體 */
             font-weight: bold;
         }
-        .section.internal input[type="text"], 
+        .section.internal input[type="text"],
         .section.internal input[type="number"] {
-            border: 1px solid #5F97D1; /* 深藍邊框 */
-            background-color: #F0F8FF; /* 輕淺藍背景 */
-            color: #2C5E91; /* 深藍文字 */
+            border: 1px solid #5F97D1;
+            background-color: #F0F8FF;
+            color: #2C5E91;
         }
-
         @media (max-width: 768px) {
             h1 {
-                font-size: 18px; /* 確保手機版標題也縮小 */
+                font-size: 20px;
             }
             label, input, button {
                 font-size: 14px;
@@ -120,14 +117,14 @@
                 padding: 10px;
             }
             .input-group {
-                flex-direction: column; /* 確保查詢股價按鈕排列在輸入框後面 */
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>有價證券信託試算表 (本金自益 孳息他益)</h1>
+        <h1>有價證券信託試算表 (本金自益孳息他益)</h1>
 
         <!-- 信託規劃基本資料 -->
         <div class="section">
