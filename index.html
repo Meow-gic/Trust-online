@@ -23,8 +23,7 @@
             padding: 20px;
              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin: 20px;
-            overflow: hidden;
-        }
+ 
         h1 {
             text-align: center;
             color: #333;
@@ -143,11 +142,16 @@
                     </div>
                 </div>
 
-                <label for="trustShares">交付信託張數</label>
-                <input type="text" id="trustShares" name="trustShares" placeholder="輸入信託張數" required>
-
-                <label for="trustYears">信託規劃年數</label>
-                <input type="number" id="trustYears" name="trustYears" placeholder="輸入信託年數" required>
+                <div class="input-group">
+                    <div style="flex: 1;">
+                        <label for="trustShares">交付信託張數</label>
+                        <input type="text" id="trustShares" name="trustShares" placeholder="輸入信託張數" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="trustYears">信託規劃年數</label>
+                        <input type="text" id="trustYears" name="trustYears" placeholder="輸入信託年數" required>
+                    </div>
+                </div>
             </form>
         </div>
 
@@ -157,7 +161,7 @@
             <div class="input-group">
                 <div style="flex: 1;">
                     <label for="futureStockPrice">預估未來股價</label>
-                    <input type="number" id="futureStockPrice" name="futureStockPrice" placeholder="輸入預估未來股價" required>
+                    <input type="text" id="futureStockPrice" name="futureStockPrice" placeholder="輸入預估未來股價" required>
                 </div>
                 <div style="flex: 1;">
                     <label for="futureEarningsShares">預估未來盈餘配股</label>
