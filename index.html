@@ -21,7 +21,7 @@
             background: rgba(255, 255, 255, 0.95);
             border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin: 20px;
             overflow: hidden;
         }
@@ -154,14 +154,20 @@
         <!-- 区块2：預估未來股價、配股配息 -->
         <div class="section">
             <div class="section-title">預估未來股價、配股配息</div>
-            <label for="futureStockPrice">預估未來股價</label>
-            <input type="number" id="futureStockPrice" name="futureStockPrice" placeholder="輸入預估未來股價" required>
-
-            <label for="futureEarningsShares">預估未來盈餘配股</label>
-            <input type="number" id="futureEarningsShares" name="futureEarningsShares" placeholder="輸入預估盈餘配股" required>
-
-            <label for="futureCashDividend">預估未來現金股利</label>
-            <input type="number" id="futureCashDividend" name="futureCashDividend" placeholder="輸入預估現金股利" required>
+            <div class="input-group">
+                <div style="flex: 1;">
+                    <label for="futureStockPrice">預估未來股價</label>
+                    <input type="number" id="futureStockPrice" name="futureStockPrice" placeholder="輸入預估未來股價" required>
+                </div>
+                <div style="flex: 1;">
+                    <label for="futureEarningsShares">預估未來盈餘配股</label>
+                    <input type="number" id="futureEarningsShares" name="futureEarningsShares" placeholder="輸入預估盈餘配股" required>
+                </div>
+                <div style="flex: 1;">
+                    <label for="futureCashDividend">預估未來現金股利</label>
+                    <input type="number" id="futureCashDividend" name="futureCashDividend" placeholder="輸入預估現金股利" required>
+                </div>
+            </div>
         </div>
 
         <!-- 区块3：內部人資訊 -->
