@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #A1BAB0;
+            background: #A1BAB0; /* 新的背景色 */
             padding: 0;
             margin: 0;
             display: flex;
@@ -33,18 +33,41 @@
             margin-bottom: 20px;
             padding: 15px;
             border-radius: 5px;
-            background-color: #FFD1C1;
         }
         .section-title {
             font-weight: bold;
-            color: white;
+            color: #FFFFFF; /* 修改標題顏色 */
             margin-bottom: 10px;
             font-size: 20px;
             text-align: center;
-            background-color: #FF6347;
             padding: 10px;
             border-radius: 5px;
         }
+
+        /* 信託規劃基本資料區塊 */
+        .section:nth-of-type(1) {
+            background-color: #D9EAF7; /* 淡藍色背景，與主色調協調 */
+        }
+        .section:nth-of-type(1) .section-title {
+            background-color: #5F97D1; /* 主色調背景 */
+        }
+
+        /* 預估未來股價、配股配息區塊 */
+        .section:nth-of-type(2) {
+            background-color: #E3F0FA; /* 更淡的藍色，增加層次感 */
+        }
+        .section:nth-of-type(2) .section-title {
+            background-color: #5F97D1; /* 主色調背景 */
+        }
+
+        /* 內部人資訊區塊 */
+        .section:nth-of-type(3) {
+            background-color: #B0CCE6; /* 深藍色調變化，突出內部人資訊區塊 */
+        }
+        .section:nth-of-type(3) .section-title {
+            background-color: #5F97D1; /* 主色調背景 */
+        }
+
         label {
             display: block;
             margin: 10px 0 5px;
@@ -62,11 +85,11 @@
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            font-size: 16px;
+            font-size: 16px; /* 增大輸入文字的大小 */
             box-sizing: border-box;
         }
         button {
-            width: 100%;
+            width: 100%; /* 使送出按鈕變大 */
             padding: 12px;
             background-color: #4CAF50;
             color: white;
@@ -100,28 +123,8 @@
                 padding: 10px;
             }
             .input-group {
-                flex-direction: column;
+                flex-direction: column; /* 確保查詢股價按鈕排列在輸入框後面 */
             }
-        }
-        /* 新增的配色 */
-        .section.internal-info {
-            background-color: #5F97D1; /* 使用新的主色調 */
-            color: white;
-        }
-        .section.internal-info .section-title {
-            background-color: #396A9F; /* 深色調的對比 */
-        }
-        .section.other-section {
-            background-color: #FFC1A1; /* 第二個區塊的新背景色 */
-        }
-        .section.other-section .section-title {
-            background-color: #FF8A47; /* 第二個區塊的新標題背景色 */
-        }
-        .section.third-section {
-            background-color: #C1FFD1; /* 第三個區塊的新背景色 */
-        }
-        .section.third-section .section-title {
-            background-color: #47FF8A; /* 第三個區塊的新標題背景色 */
         }
     </style>
 </head>
@@ -130,7 +133,7 @@
         <h1>有價證券信託試算表 (本金自益孳息他益)</h1>
 
         <!-- 信託規劃基本資料 -->
-        <div class="section other-section">
+        <div class="section">
             <div class="section-title">信託規劃基本資料</div>
             <form id="trustForm">
                 <label for="clientName">客戶姓名</label>
@@ -165,7 +168,7 @@
         </div>
 
         <!-- 預估未來股價、配股配息 -->
-        <div class="section third-section">
+        <div class="section">
             <div class="section-title">預估未來股價、配股配息</div>
             <div class="input-group">
                 <div style="flex: 1;">
@@ -184,7 +187,7 @@
         </div>
 
         <!-- 內部人資訊 -->
-        <div class="section internal-info">
+        <div class="section">
             <div class="section-title">內部人資訊</div>
             <div class="input-group">
                 <div style="flex: 1;">
@@ -223,7 +226,7 @@
             const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
             const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
 
-                       // 计算应保留股数，公式：IF(ISBLANK(I4), 0, ROUND(I4/2+1, 0))
+            // 计算应保留股数，公式：IF(ISBLANK(I4), 0, ROUND(I4/2+1, 0))
             const retainedShares = initialHolding ? Math.round(initialHolding / 2 + 1) : 0;
             document.getElementById('retainedShares').value = retainedShares;
 
@@ -232,17 +235,10 @@
             document.getElementById('maxAvailableShares').value = maxAvailableShares;
 
             // 显示结果
-            const resultData = `
-                應保留股數: ${retainedShares} 股<br>
-                最多可承做股數: ${maxAvailableShares} 股
-            `;
-            document.getElementById('result').innerHTML = `
-                <h2>結果彙總</h2>
-                <p>${resultData}</p>
-            `;
+            const resultData = `應保留股數: ${retainedShares} 股<br>最多可承做股數: ${maxAvailableShares} 股`;
+            document.getElementById('result').innerHTML = `<h2>結果彙總</h2><p>${resultData}</p>`;
         }
-
-        function updateRetainedAndMaxShares() {
+    function updateRetainedAndMaxShares() {
             const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
             const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
 
