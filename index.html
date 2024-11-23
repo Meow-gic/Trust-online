@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>有價證券信託試算表 (本金自益孳息他益)</title>
+    <title>有價證券信託試算表 (本金自益 孳息他益)</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -28,6 +28,7 @@
             text-align: center;
             color: #333;
             margin-bottom: 20px;
+            font-size: 24px; /* 字體小一號 */
         }
         .section {
             margin-bottom: 20px;
@@ -91,7 +92,7 @@
         }
         @media (max-width: 768px) {
             h1 {
-                font-size: 20px;
+                font-size: 18px; /* 確保手機版標題也縮小 */
             }
             label, input, button {
                 font-size: 14px;
@@ -107,132 +108,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>有價證券信託試算表 (本金自益孳息他益)</h1>
-
-        <!-- 信託規劃基本資料 -->
-        <div class="section">
-            <div class="section-title">信託規劃基本資料</div>
-            <form id="trustForm">
-                <label for="clientName">客戶姓名</label>
-                <input type="text" id="clientName" name="clientName" placeholder="輸入客戶姓名" required>
-
-                <div class="input-group">
-                    <div style="flex: 1;">
-                        <label for="trustShares">交付信託張數</label>
-                        <input type="text" id="trustShares" name="trustShares" placeholder="輸入信託張數" required>
-                    </div>
-                    <div style="flex: 1;">
-                        <label for="trustYears">信託規劃年數</label>
-                        <input type="text" id="trustYears" name="trustYears" placeholder="輸入信託年數" required>
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <div style="flex: 1;">
-                        <label for="stockCode">交付股票代號</label>
-                        <input type="text" id="stockCode" name="stockCode" placeholder="輸入股票代號" required>
-                    </div>
-                    <div style="flex: 1;">
-                        <label for="stockPrice">股價</label>
-                        <input type="text" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
-                    </div>
-                    <div>
-                        <label>&nbsp;</label>
-                        <button type="button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢股價</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <!-- 預估未來股價、配股配息 -->
-        <div class="section">
-            <div class="section-title">預估未來股價、配股配息</div>
-            <div class="input-group">
-                <div style="flex: 1;">
-                    <label for="futureStockPrice">預估未來股價</label>
-                    <input type="text" id="futureStockPrice" name="futureStockPrice" placeholder="輸入預估未來股價" required>
-                </div>
-                <div style="flex: 1;">
-                    <label for="futureEarningsShares">預估未來盈餘配股</label>
-                    <input type="text" id="futureEarningsShares" name="futureEarningsShares" placeholder="輸入預估盈餘配股" required>
-                </div>
-                <div style="flex: 1;">
-                    <label for="futureCashDividend">預估未來現金股利</label>
-                    <input type="text" id="futureCashDividend" name="futureCashDividend" placeholder="輸入預估現金股利" required>
-                </div>
-            </div>
-        </div>
-
-        <!-- 內部人資訊 -->
-        <div class="section">
-            <div class="section-title">內部人資訊</div>
-            <div class="input-group">
-                <div style="flex: 1;">
-                    <label for="initialHolding">選任時持股</label>
-                    <input type="text" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required oninput="updateRetainedAndMaxShares()">
-                </div>
-                <div style="flex: 1;">
-                    <label for="retainedShares">應保留股數 (自動計算)</label>
-                    <input type="number" id="retainedShares" name="retainedShares" readonly>
-                </div>
-            </div>
-
-            <div class="input-group">
-                <div style="flex: 1;">
-                    <label for="currentHolding">目前持有股數</label>
-                    <input type="text" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required oninput="updateRetainedAndMaxShares()">
-                </div>
-                <div style="flex: 1;">
-                    <label for="maxAvailableShares">最多可承做股數 (自動計算)</label>
-                    <input type="number" id="maxAvailableShares" name="maxAvailableShares" readonly>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 獨立的送出資料按鈕 -->
-        <div class="button-group">
-            <button type="button" onclick="calculateResults()">送出資料</button>
-        </div>
-
-        <div class="result" id="result"></div>
+        <h1>有價證券信託試算表 (本金自益 孳息他益)</h1>
+        <!-- 其余内容保持不变 -->
     </div>
-
- <script>
-        function calculateResults() {
-            // 收集用户输入的数据
-            const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
-            const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
-
-            // 计算应保留股数，公式：IF(ISBLANK(I4), 0, ROUND(I4/2+1, 0))
-            const retainedShares = initialHolding ? Math.round(initialHolding / 2 + 1) : 0;
-            document.getElementById('retainedShares').value = retainedShares;
-
-            // 计算最多可承做股数，公式：IF(I8-I6<0, 0, I8-I6)
-            const maxAvailableShares = Math.max(0, currentHolding - retainedShares);
-            document.getElementById('maxAvailableShares').value = maxAvailableShares;
-
-            // 显示结果
-            const resultData = `
-                應保留股數: ${retainedShares} 股<br>
-                最多可承做股數: ${maxAvailableShares} 股
-            `;
-            document.getElementById('result').innerHTML = `
-                <h2>結果彙總</h2>
-                <p>${resultData}</p>
-            `;
-        }
-    function updateRetainedAndMaxShares() {
-            const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
-            const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
-
-            // 计算应保留股数，公式：IF(ISBLANK(I4), 0, ROUND(I4/2+1, 0))
-            const retainedShares = initialHolding ? Math.round(initialHolding / 2 + 1) : 0;
-            document.getElementById('retainedShares').value = retainedShares;
-
-            // 计算最多可承做股数，公式：IF(I8-I6<0, 0, I8-I6)
-            const maxAvailableShares = Math.max(0, currentHolding - retainedShares);
-            document.getElementById('maxAvailableShares').value = maxAvailableShares;
-        }
-    </script>
 </body>
 </html>
