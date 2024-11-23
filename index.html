@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #E8F1F5; /* 新的背景色 */
+            background: #A1BAB0;
             padding: 0;
             margin: 0;
             display: flex;
@@ -26,38 +26,30 @@
         }
         h1 {
             text-align: center;
-            color: #2C3E50;
+            color: #333;
             margin-bottom: 20px;
         }
         .section {
             margin-bottom: 20px;
             padding: 15px;
-            border-radius: 10px;
-            background-color: #F5F7FA; /* 区块背景色 */
+            border-radius: 5px;
+            background-color: #FFD1C1;
         }
         .section-title {
             font-weight: bold;
+            color: white;
             margin-bottom: 10px;
             font-size: 20px;
             text-align: center;
-            background-color: #3498DB; /* 标题背景色 */
-            color: #FFFFFF;
+            background-color: #FF6347;
             padding: 10px;
             border-radius: 5px;
-        }
-        /* 修改内部联系人资讯区块的样式 */
-        .section:nth-child(4) {
-            background-color: #DFF1FF; /* 主色调浅色背景 */
-            border: 2px solid #5F97D1;
-        }
-        .section:nth-child(4) .section-title {
-            background-color: #5F97D1; /* 主色调深色背景 */
         }
         label {
             display: block;
             margin: 10px 0 5px;
             font-weight: bold;
-            color: #2C3E50;
+            color: #333;
         }
         .input-group {
             display: flex;
@@ -68,7 +60,7 @@
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #CCC;
+            border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 16px;
             box-sizing: border-box;
@@ -76,7 +68,7 @@
         button {
             width: 100%;
             padding: 12px;
-            background-color: #27AE60;
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 4px;
@@ -84,12 +76,12 @@
             font-size: 16px;
         }
         button:hover {
-            background-color: #219150;
+            background-color: #45a049;
         }
         .result {
             margin-top: 20px;
             text-align: center;
-            color: #2C3E50;
+            color: #333;
             font-size: 16px;
         }
         .button-group {
@@ -111,6 +103,26 @@
                 flex-direction: column;
             }
         }
+        /* 新增的配色 */
+        .section.internal-info {
+            background-color: #5F97D1; /* 使用新的主色調 */
+            color: white;
+        }
+        .section.internal-info .section-title {
+            background-color: #396A9F; /* 深色調的對比 */
+        }
+        .section.other-section {
+            background-color: #FFC1A1; /* 第二個區塊的新背景色 */
+        }
+        .section.other-section .section-title {
+            background-color: #FF8A47; /* 第二個區塊的新標題背景色 */
+        }
+        .section.third-section {
+            background-color: #C1FFD1; /* 第三個區塊的新背景色 */
+        }
+        .section.third-section .section-title {
+            background-color: #47FF8A; /* 第三個區塊的新標題背景色 */
+        }
     </style>
 </head>
 <body>
@@ -118,7 +130,7 @@
         <h1>有價證券信託試算表 (本金自益孳息他益)</h1>
 
         <!-- 信託規劃基本資料 -->
-        <div class="section">
+        <div class="section other-section">
             <div class="section-title">信託規劃基本資料</div>
             <form id="trustForm">
                 <label for="clientName">客戶姓名</label>
@@ -153,7 +165,7 @@
         </div>
 
         <!-- 預估未來股價、配股配息 -->
-        <div class="section">
+        <div class="section third-section">
             <div class="section-title">預估未來股價、配股配息</div>
             <div class="input-group">
                 <div style="flex: 1;">
@@ -172,7 +184,7 @@
         </div>
 
         <!-- 內部人資訊 -->
-        <div class="section">
+        <div class="section internal-info">
             <div class="section-title">內部人資訊</div>
             <div class="input-group">
                 <div style="flex: 1;">
@@ -205,12 +217,43 @@
         <div class="result" id="result"></div>
     </div>
 
-    <script>
+ <script>
         function calculateResults() {
+            // 收集用户输入的数据
             const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
             const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
 
+                       // 计算应保留股数，公式：IF(ISBLANK(I4), 0, ROUND(I4/2+1, 0))
             const retainedShares = initialHolding ? Math.round(initialHolding / 2 + 1) : 0;
             document.getElementById('retainedShares').value = retainedShares;
 
+            // 计算最多可承做股数，公式：IF(I8-I6<0, 0, I8-I6)
             const maxAvailableShares = Math.max(0, currentHolding - retainedShares);
+            document.getElementById('maxAvailableShares').value = maxAvailableShares;
+
+            // 显示结果
+            const resultData = `
+                應保留股數: ${retainedShares} 股<br>
+                最多可承做股數: ${maxAvailableShares} 股
+            `;
+            document.getElementById('result').innerHTML = `
+                <h2>結果彙總</h2>
+                <p>${resultData}</p>
+            `;
+        }
+
+        function updateRetainedAndMaxShares() {
+            const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
+            const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
+
+            // 计算应保留股数，公式：IF(ISBLANK(I4), 0, ROUND(I4/2+1, 0))
+            const retainedShares = initialHolding ? Math.round(initialHolding / 2 + 1) : 0;
+            document.getElementById('retainedShares').value = retainedShares;
+
+            // 计算最多可承做股数，公式：IF(I8-I6<0, 0, I8-I6)
+            const maxAvailableShares = Math.max(0, currentHolding - retainedShares);
+            document.getElementById('maxAvailableShares').value = maxAvailableShares;
+        }
+    </script>
+</body>
+</html>
