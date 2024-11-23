@@ -165,11 +165,11 @@
                 </div>
                 <div style="flex: 1;">
                     <label for="futureEarningsShares">預估未來盈餘配股</label>
-                    <input type="number" id="futureEarningsShares" name="futureEarningsShares" placeholder="輸入預估盈餘配股" required>
+                    <input type="text" id="futureEarningsShares" name="futureEarningsShares" placeholder="輸入預估盈餘配股" required>
                 </div>
                 <div style="flex: 1;">
                     <label for="futureCashDividend">預估未來現金股利</label>
-                    <input type="number" id="futureCashDividend" name="futureCashDividend" placeholder="輸入預估現金股利" required>
+                    <input type="text" id="futureCashDividend" name="futureCashDividend" placeholder="輸入預估現金股利" required>
                 </div>
             </div>
         </div>
@@ -181,7 +181,7 @@
                 <div class="input-group">
                     <div style="flex: 1;">
                         <label for="initialHolding">選任時持股</label>
-                        <input type="number" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required oninput="updateRetainedAndMaxShares()">
+                        <input type="text" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required oninput="updateRetainedAndMaxShares()">
                     </div>
                     <div style="flex: 1;">
                         <label for="retainedShares">應保留股數 (自動計算)</label>
@@ -192,7 +192,7 @@
                 <div class="input-group">
                     <div style="flex: 1;">
                         <label for="currentHolding">目前持有股數</label>
-                        <input type="number" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required oninput="updateRetainedAndMaxShares()">
+                        <input type="text" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required oninput="updateRetainedAndMaxShares()">
                     </div>
                     <div style="flex: 1;">
                         <label for="maxAvailableShares">最多可承做股數 (自動計算)</label>
