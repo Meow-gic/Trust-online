@@ -269,6 +269,7 @@
             } else {
                 giftTax = (E5 - F5) * 0.2 - 3750000;
             }
+            giftTax = giftTax < 0 ? 0 : Math.round(giftTax);
             giftTax = giftTax < 0 ? 0 : giftTax;
 
             // 显示结果
@@ -277,7 +278,7 @@
                     <tr style="background-color: #D9EAF7;">
                         <td style="padding: 10px; font-weight: bold;">信託本金</td>
                         <td style="padding: 10px;">${trustPrincipal.toLocaleString()} 元</td>
-<tr style="background-color: #F5F5F5;">
+                     <tr style="background-color: #F5F5F5;">
                         <td style="padding: 10px; font-weight: bold;">信託期間</td>
                         <td style="padding: 10px;">${trustYears} 年</td>
                     </tr>
