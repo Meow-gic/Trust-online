@@ -267,8 +267,8 @@
             const trustPrincipal = trustShares * 1000 * stockPrice;
         
             // 计算股利收入
-            const dividendIncome = Math.round(Math.floor((trustShares * 1000 * futureEarningsShares) / 10) * stockPrice) +
-                                   Math.round(Math.floor(trustShares * 1000 * futureCashDividend));
+            const dividendIncome = (Math.round(Math.floor((trustShares * 1000 * futureEarningsShares) / 10) * stockPrice) +
+                        Math.round(Math.floor(trustShares * 1000 * futureCashDividend))) * trustYears;
         
             // 计算應繳贈與稅 (E5 - F5)
             const F5 = 2440000;
