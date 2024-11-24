@@ -135,6 +135,20 @@
     <div class="container">
         <h1>有價證券信託-本金自益孳息他益試算器</h1>
 
+
+    /* 隱藏數字輸入框的上下控制項 */
+    input[type="number"] {
+        -moz-appearance: textfield; /* Firefox */
+        -webkit-appearance: none; /* Safari and Chrome */
+        appearance: none;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
+
 <!-- 信託規劃基本資料 -->
 <div class="section">
     <div class="section-title">信託規劃基本資料</div>
@@ -145,22 +159,22 @@
         <div class="input-group">
             <div style="flex: 1;">
                 <label for="trustShares"><span style="color: red;">*</span> 交付信託張數</label>
-                <input type="tel" id="trustShares" name="trustShares" placeholder="輸入信託張數" required pattern="[0-9]*">
+                <input type="number" id="trustShares" name="trustShares" placeholder="輸入信託張數" required>
             </div>
             <div style="flex: 1;">
                 <label for="trustYears"><span style="color: red;">*</span> 信託規劃年數</label>
-                <input type="tel" id="trustYears" name="trustYears" placeholder="輸入信託年數" required pattern="[0-9]*">
+                <input type="number" id="trustYears" name="trustYears" placeholder="輸入信託年數" required>
             </div>
         </div>
 
         <div class="input-group">
             <div style="flex: 1;">
                 <label for="stockCode"><span style="color: red;">*</span> 交付股票代號</label>
-                <input type="text" id="stockCode" name="stockCode" placeholder="輸入股票代號" required inputmode="numeric">
+                <input type="text" id="stockCode" name="stockCode" placeholder="輸入股票代號" required>
             </div>
             <div style="flex: 1;">
                 <label for="stockPrice"><span style="color: red;">*</span> 股價</label>
-                <input type="text" id="stockPrice" name="stockPrice" placeholder="輸入股價" required inputmode="decimal">
+                <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
             </div>
             <div>
                 <label>&nbsp;</label>
@@ -170,21 +184,21 @@
     </form>
 </div>
 
-<!-- 預估未來股價、配股配息區塊 -->
+<!-- 預估未來股價、配股配息 -->
 <div class="section">
     <div class="section-title">預估未來股價、配股配息</div>
     <div class="input-group">
         <div style="flex: 1;">
             <label for="futureStockPrice"><span style="color: red;">*</span> 預估未來股價</label>
-            <input type="number" id="futureStockPrice" name="futureStockPrice" placeholder="輸入預估未來股價" required style="appearance: textfield; -moz-appearance: textfield; -webkit-appearance: none;">
+            <input type="number" id="futureStockPrice" name="futureStockPrice" placeholder="輸入預估未來股價" required>
         </div>
         <div style="flex: 1;">
             <label for="futureEarningsShares"><span style="color: red;">*</span> 預估未來盈餘配股</label>
-            <input type="number" id="futureEarningsShares" name="futureEarningsShares" placeholder="輸入預估盈餘配股" required style="appearance: textfield; -moz-appearance: textfield; -webkit-appearance: none;">
+            <input type="number" id="futureEarningsShares" name="futureEarningsShares" placeholder="輸入預估盈餘配股" required>
         </div>
         <div style="flex: 1;">
             <label for="futureCashDividend"><span style="color: red;">*</span> 預估未來現金股利</label>
-            <input type="number" id="futureCashDividend" name="futureCashDividend" placeholder="輸入預估現金股利" required style="appearance: textfield; -moz-appearance: textfield; -webkit-appearance: none;">
+            <input type="number" id="futureCashDividend" name="futureCashDividend" placeholder="輸入預估現金股利" required>
         </div>
     </div>
 </div>
@@ -195,7 +209,7 @@
     <div class="input-group">
         <div style="flex: 1;">
             <label for="initialHolding">選任時持股</label>
-            <input type="number" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required oninput="updateRetainedAndMaxShares()">
+            <input type="number" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required>
         </div>
         <div style="flex: 1;">
             <label for="retainedShares">應保留股數 (自動計算)</label>
@@ -206,15 +220,14 @@
     <div class="input-group">
         <div style="flex: 1;">
             <label for="currentHolding">目前持有股數</label>
-            <input type="number" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required oninput="updateRetainedAndMaxShares()">
+            <input type="number" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required>
         </div>
         <div style="flex: 1;">
             <label for="maxAvailableShares">最多可承做股數 (自動計算)</label>
             <input type="number" id="maxAvailableShares" name="maxAvailableShares" readonly>
         </div>
     </div>
-</div>
-        
+</div>        
         <!-- 送出資料按鈕 -->
         <div class="button-group">
             <button type="button" onclick="validateAndCalculateResults()">送出資料</button>
@@ -224,28 +237,6 @@
     </div>
 
 <script>
-    function validateAndCalculateResults() {
-        const requiredFields = [
-            { id: 'trustShares', name: '交付信託張數' },
-            { id: 'trustYears', name: '信託規劃年數' },
-            { id: 'stockCode', name: '交付股票代號' },
-            { id: 'stockPrice', name: '股價' },
-            { id: 'futureStockPrice', name: '預估未來股價' },
-            { id: 'futureEarningsShares', name: '預估未來盈餘配股' },
-            { id: 'futureCashDividend', name: '預估未來現金股利' }
-        ];
-
-        for (let field of requiredFields) {
-            const value = document.getElementById(field.id).value;
-            if (!value) {
-                alert(`請填寫 ${field.name}`);
-                return;
-            }
-        }
-
-        calculateResults();
-    }
-
     function calculateResults() {
         // 收集用户输入的数据
         const trustShares = parseFloat(document.getElementById('trustShares').value) || 0;
@@ -279,20 +270,20 @@
 
         // 显示结果
         const resultData = `
-            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-                <tr style="background-color: #F4EDDA;">
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px; border: 1px solid #D3D3D3;">
+                <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
                     <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">信託本金</td>
                     <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${trustPrincipal.toLocaleString()} 元</td>
                 </tr>
-                <tr style="background-color: #F4EDDA;">
+                <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
                     <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">信託期間</td>
                     <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${trustYears} 年</td>
                 </tr>
-                <tr style="background-color: #F4EDDA;">
+                <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
                     <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">股利收入</td>
                     <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${dividendIncome.toLocaleString()} 元</td>
                 </tr>
-                <tr style="background-color: #F4EDDA;">
+                <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
                     <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">應繳贈與稅</td>
                     <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${giftTax.toLocaleString()} 元</td>
                 </tr>
