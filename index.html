@@ -234,6 +234,30 @@
     </div>
 
 <script>
+    function validateAndCalculateResults() {
+        // 檢查必填的欄位是否都有值
+        const requiredFields = [
+            { id: 'trustShares', name: '交付信託張數' },
+            { id: 'trustYears', name: '信託規劃年數' },
+            { id: 'stockCode', name: '交付股票代號' },
+            { id: 'stockPrice', name: '股價' },
+            { id: 'futureStockPrice', name: '預估未來股價' },
+            { id: 'futureEarningsShares', name: '預估未來盈餘配股' },
+            { id: 'futureCashDividend', name: '預估未來現金股利' }
+        ];
+
+        for (let field of requiredFields) {
+            const value = document.getElementById(field.id).value;
+            if (!value) {
+                alert(`請填寫 ${field.name}`);
+                return; // 停止執行，直到所有欄位都有值
+            }
+        }
+
+        // 所有必填項目都有值，進行計算
+        calculateResults();
+    }
+
     function calculateResults() {
         // 收集用户输入的数据
         const trustShares = parseFloat(document.getElementById('trustShares').value) || 0;
