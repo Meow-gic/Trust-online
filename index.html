@@ -234,30 +234,6 @@
     </div>
 
 <script>
-    function validateAndCalculateResults() {
-        // 檢查必填的欄位是否都有值
-        const requiredFields = [
-            { id: 'trustShares', name: '交付信託張數' },
-            { id: 'trustYears', name: '信託規劃年數' },
-            { id: 'stockCode', name: '交付股票代號' },
-            { id: 'stockPrice', name: '股價' },
-            { id: 'futureStockPrice', name: '預估未來股價' },
-            { id: 'futureEarningsShares', name: '預估未來盈餘配股' },
-            { id: 'futureCashDividend', name: '預估未來現金股利' }
-        ];
-
-        for (let field of requiredFields) {
-            const value = document.getElementById(field.id).value;
-            if (!value) {
-                alert(`請填寫 ${field.name}`);
-                return; // 停止執行，直到所有欄位都有值
-            }
-        }
-
-        // 所有必填項目都有值，進行計算
-        calculateResults();
-    }
-
     function calculateResults() {
         // 收集用户输入的数据
         const trustShares = parseFloat(document.getElementById('trustShares').value) || 0;
@@ -291,7 +267,7 @@
 
         // 显示结果
         const resultData = `
-            <table style="width: 100%; border-collapse: collapse; margin-top: 20px; border: 1px solid #D3D3D3;">
+            <table style="width: 80%; margin: 0 auto; border-collapse: collapse; margin-top: 20px; border: 1px solid #D3D3D3;">
                 <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
                     <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">信託本金</td>
                     <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${trustPrincipal.toLocaleString()} 元</td>
