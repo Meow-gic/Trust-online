@@ -256,19 +256,20 @@
 
         function calculateResults() {
             // 收集用户输入的数据
-            const trustShares = parseFloat(document.getElementById('trustShares').value) || 0;
-            const trustYears = parseFloat(document.getElementById('trustYears').value) || 0;
-            const stockPrice = parseFloat(document.getElementById('stockPrice').value) || 0;
-
+            const trustShares = parseFloat(document.getElementById('trustShares').value) || 0; // 交付信託張數
+            const trustYears = parseFloat(document.getElementById('trustYears').value) || 0; // 信託規劃年數
+            const stockPrice = parseFloat(document.getElementById('stockPrice').value) || 0; // 股價
+        
+            const futureEarningsShares = parseFloat(document.getElementById('futureEarningsShares').value) || 0; // 預估未來盈餘配股
+            const futureCashDividend = parseFloat(document.getElementById('futureCashDividend').value) || 0; // 預估未來現金股利
+        
             // 计算信託本金
             const trustPrincipal = trustShares * 1000 * stockPrice;
-
+        
             // 计算股利收入
-            const futureStockPrice = parseFloat(document.getElementById('futureStockPrice').value) || 0;
-            const futureEarningsShares = parseFloat(document.getElementById('futureEarningsShares').value) || 0;
-            const futureCashDividend = parseFloat(document.getElementById('futureCashDividend').value) || 0;
-            const dividendIncome = futureEarningsShares * futureStockPrice + futureCashDividend * trustShares;
-
+            const dividendIncome = Math.round(Math.floor((trustShares * 1000 * futureEarningsShares) / 10) * stockPrice) +
+                                   Math.round(Math.floor(trustShares * 1000 * futureCashDividend));
+        
             // 计算應繳贈與稅 (E5 - F5)
             const F5 = 2440000;
             const E5 = trustPrincipal - trustPrincipal / Math.pow(1 + 0.01725, trustYears);
@@ -281,10 +282,10 @@
                 giftTax = (E5 - F5) * 0.2 - 3750000;
             }
             giftTax = giftTax < 0 ? 0 : giftTax;
-
+        
             // 计算最多可省稅金
             const maxTaxSavings = giftTax;
-
+        
             // 显示结果
             const resultData = `
                 <table style="width: 77%; margin: 0 auto; border-collapse: collapse; margin-top: 20px; border: 1px solid #D3D3D3;">
