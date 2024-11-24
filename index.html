@@ -281,7 +281,7 @@
             } else {
                 giftTax = (E5 - F5) * 0.2 - 3750000;
             }
-            giftTax = giftTax < 0 ? 0 : giftTax;
+            giftTax = giftTax < 0 ? 0 : Math.round(giftTax);// 四捨五入到整數位
         
             // 计算最多可省稅金
             const maxTaxSavings = giftTax;
