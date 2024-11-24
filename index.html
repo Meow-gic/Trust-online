@@ -1,3 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>有價證券信託-本金自益孳息他益試算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #9CD9DF;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 95%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #FFFFFF;
+            margin-bottom: 10px;
+            font-size: 20px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* 信託規劃基本資料區塊 */
+        .section:nth-of-type(1) {
+            background-color: #FFD1C1;
+        }
+        .section:nth-of-type(1) .section-title {
+            background-color: #e55347;
+        }
+
+        /* 預估未來股價、配股配息區塊 */
+        .section:nth-of-type(2) {
+            background-color: #FFD1C1;
+        }
+        .section:nth-of-type(2) .section-title {
+            background-color: #e55347;
+        }
+
+        /* 內部人資訊區塊 */
+        .section:nth-of-type(3) {
+            background-color: #D9EAF7;
+        }
+        .section:nth-of-type(3) .section-title {
+            background-color: #5F97D1;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        input[type="text"], input[type="number"], input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            color: #333;
+            font-size: 16px;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        table {
+            font-size: 16px;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+            }
+            label, input, button {
+                font-size: 14px;
+            }
+            button {
+                padding: 10px;
+            }
+            .input-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>有價證券信託-本金自益孳息他益試算器</h1>
+
+<!-- 信託規劃基本資料 -->
+<div class="section">
+    <div class="section-title">信託規劃基本資料</div>
+    <form id="trustForm">
+        <label for="clientName">客戶姓名</label>
+        <input type="text" id="clientName" name="clientName" placeholder="輸入客戶姓名" required>
+
+        <div class="input-group">
+            <div style="flex: 1;">
+                <label for="trustShares"><span style="color: red;">*</span> 交付信託張數</label>
+                <input type="tel" id="trustShares" name="trustShares" placeholder="輸入信託張數" required pattern="[0-9]*">
+            </div>
+            <div style="flex: 1;">
+                <label for="trustYears"><span style="color: red;">*</span> 信託規劃年數</label>
+                <input type="tel" id="trustYears" name="trustYears" placeholder="輸入信託年數" required pattern="[0-9]*">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <div style="flex: 1;">
+                <label for="stockCode"><span style="color: red;">*</span> 交付股票代號</label>
+                <input type="text" id="stockCode" name="stockCode" placeholder="輸入股票代號" required inputmode="numeric">
+            </div>
+            <div style="flex: 1;">
+                <label for="stockPrice"><span style="color: red;">*</span> 股價</label>
+                <input type="text" id="stockPrice" name="stockPrice" placeholder="輸入股價" required inputmode="decimal">
+            </div>
+            <div>
+                <label>&nbsp;</label>
+                <button type="button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢股價</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- 預估未來股價、配股配息 -->
+<div class="section">
+    <div class="section-title">預估未來股價、配股配息</div>
+    <div class="input-group">
+        <div style="flex: 1;">
+            <label for="futureStockPrice"><span style="color: red;">*</span> 預估未來股價</label>
+            <input type="number" id="futureStockPrice" name="futureStockPrice" placeholder="輸入預估未來股價" required step="0.01">
+        </div>
+        <div style="flex: 1;">
+            <label for="futureEarningsShares"><span style="color: red;">*</span> 預估未來盈餘配股</label>
+            <input type="number" id="futureEarningsShares" name="futureEarningsShares" placeholder="輸入預估盈餘配股" required>
+        </div>
+        <div style="flex: 1;">
+            <label for="futureCashDividend"><span style="color: red;">*</span> 預估未來現金股利</label>
+            <input type="number" id="futureCashDividend" name="futureCashDividend" placeholder="輸入預估現金股利" required step="0.01">
+        </div>
+    </div>
+</div>
+
+<!-- 內部人資訊 -->
+<div class="section">
+    <div class="section-title">內部人資訊</div>
+    <div class="input-group">
+        <div style="flex: 1;">
+            <label for="initialHolding">選任時持股</label>
+            <input type="number" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required oninput="updateRetainedAndMaxShares()">
+        </div>
+        <div style="flex: 1;">
+            <label for="retainedShares">應保留股數 (自動計算)</label>
+            <input type="number" id="retainedShares" name="retainedShares" readonly>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <div style="flex: 1;">
+            <label for="currentHolding">目前持有股數</label>
+            <input type="number" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required oninput="updateRetainedAndMaxShares()">
+        </div>
+        <div style="flex: 1;">
+            <label for="maxAvailableShares">最多可承做股數 (自動計算)</label>
+            <input type="number" id="maxAvailableShares" name="maxAvailableShares" readonly>
+        </div>
+    </div>
+</div>
+        
+        <!-- 送出資料按鈕 -->
+        <div class="button-group">
+            <button type="button" onclick="validateAndCalculateResults()">送出資料</button>
+        </div>
+
+        <div class="result" id="result"></div>
+    </div>
+
 <script>
     function validateAndCalculateResults() {
         const requiredFields = [
@@ -79,4 +304,19 @@
         `;
         document.getElementById('result').innerHTML = `<h2>查詢結果</h2>${resultData}`;
     }
-</script>
+
+        function updateRetainedAndMaxShares() {
+            const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
+            const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
+
+            // 计算应保留股数，公式：IF(ISBLANK(I4), 0, ROUND(I4/2+1, 0))
+            const retainedShares = initialHolding ? Math.round(initialHolding / 2 + 1) : 0;
+            document.getElementById('retainedShares').value = retainedShares;
+
+            // 计算最多可承做股数，公式：IF(I8-I6<0, 0, I8-I6)
+            const maxAvailableShares = Math.max(0, currentHolding - retainedShares);
+            document.getElementById('maxAvailableShares').value = maxAvailableShares;
+        }
+    </script>
+</body>
+</html>
