@@ -150,8 +150,8 @@
 
                 <div class="input-group">
                     <div style="flex: 1;">
-                        <label for="trustShares"><span style="color: red;">*</span> 交付信託張數</label>
-                        <input type="number" id="trustShares" name="trustShares" placeholder="輸入信託張數" required>
+                        <label for="trustShares"><span style="color: red;">*</span> 交付信託股票張數</label>
+                        <input type="number" id="trustShares" name="trustShares" placeholder="輸入股票張數" required>
                     </div>
                     <div style="flex: 1;">
                         <label for="trustYears"><span style="color: red;">*</span> 信託規劃年數（至少３年）</label>
@@ -233,8 +233,8 @@
         function validateAndCalculateResults() {
             // 檢查必填的欄位是否都有值
             const requiredFields = [
-                { id: 'trustShares', name: '交付信託張數' },
-                { id: 'trustYears', name: '信託規劃年數' },
+                { id: 'trustShares', name: '交付信託股票張數' },
+                { id: 'trustYears', name: '信託規劃年數（至少３年）' },
                 { id: 'stockCode', name: '交付股票代號' },
                 { id: 'stockPrice', name: '股價' },
                 { id: 'futureStockPrice', name: '預估未來股價' },
