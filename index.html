@@ -279,35 +279,36 @@
 
         // 显示结果
         const resultData = `
-            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-                <tr style="background-color: #5F97D1;">
-                    <td style="padding: 15px; font-weight: bold; color: #FFFFFF; text-align: left;">信託本金</td>
-                    <td style="padding: 15px; background-color: #FFFFFF; text-align: right; color: #333;">${trustPrincipal.toLocaleString()} 元</td>
+            <table style="width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 20px;">
+                <tr style="background-color: #457B9D; color: #FFFFFF;">
+                    <td style="padding: 20px; font-weight: bold; text-align: left; border-top-left-radius: 10px;">信託本金</td>
+                    <td style="padding: 20px; text-align: right; background-color: #F1FAEE; color: #333; border-top-right-radius: 10px;">${trustPrincipal.toLocaleString()} 元</td>
                 </tr>
-                <tr style="background-color: #5F97D1;">
-                    <td style="padding: 15px; font-weight: bold; color: #FFFFFF; text-align: left;">信託期間</td>
-                    <td style="padding: 15px; background-color: #FFFFFF; text-align: right; color: #333;">${trustYears} 年</td>
+                <tr style="background-color: #457B9D; color: #FFFFFF;">
+                    <td style="padding: 20px; font-weight: bold; text-align: left;">信託期間</td>
+                    <td style="padding: 20px; text-align: right; background-color: #F1FAEE; color: #333;">${trustYears} 年</td>
                 </tr>
-                <tr style="background-color: #5F97D1;">
-                    <td style="padding: 15px; font-weight: bold; color: #FFFFFF; text-align: left;">股利收入</td>
-                    <td style="padding: 15px; background-color: #FFFFFF; text-align: right; color: #333;">${dividendIncome.toLocaleString()} 元</td>
+                <tr style="background-color: #457B9D; color: #FFFFFF;">
+                    <td style="padding: 20px; font-weight: bold; text-align: left;">股利收入</td>
+                    <td style="padding: 20px; text-align: right; background-color: #F1FAEE; color: #333;">${dividendIncome.toLocaleString()} 元</td>
                 </tr>
-                <tr style="background-color: #5F97D1;">
-                    <td style="padding: 15px; font-weight: bold; color: #FFFFFF; text-align: left;">應繳贈與稅</td>
-                    <td style="padding: 15px; background-color: #FFFFFF; text-align: right; color: #333;">${giftTax.toLocaleString()} 元</td>
+                <tr style="background-color: #457B9D; color: #FFFFFF;">
+                    <td style="padding: 20px; font-weight: bold; text-align: left;">應繳贈與稅</td>
+                    <td style="padding: 20px; text-align: right; background-color: #F1FAEE; color: #333;">${giftTax.toLocaleString()} 元</td>
                 </tr>
-                <tr style="background-color: #e55347; color: #FFFFFF;">
-                    <td colspan="2" style="padding: 20px; text-align: center; font-weight: bold;">最多可省下 ${maxTaxSavings.toLocaleString()} 元</td>
+                <tr style="background-color: #E63946; color: #FFFFFF;">
+                    <td colspan="2" style="padding: 25px; text-align: center; font-weight: bold; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">最多可省下 ${maxTaxSavings.toLocaleString()} 元</td>
                 </tr>
             </table>
-            <div style="margin-top: 15px; padding: 15px; background-color: #FFF4E5; border-left: 5px solid #FFA500;">
-                <p style="margin: 0; font-size: 14px; color: #333;">
+            <div style="margin-top: 15px; padding: 20px; background-color: #FFF4E5; border-left: 5px solid #FFA500; border-radius: 10px;">
+                <p style="margin: 0; font-size: 16px; color: #333;">
                     <strong>!</strong> 贈與稅試算僅供參考，實際應繳稅額仍依據當年度個人贈與情況決定
                 </p>
             </div>
         `;
         document.getElementById('result').innerHTML = `<h2>查詢結果</h2>${resultData}`;
     }
+
 
         function updateRetainedAndMaxShares() {
             const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
