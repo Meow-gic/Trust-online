@@ -5,17 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>有價證券信託-本金自益孳息他益試算器</title>
     <style>
-        /* 隱藏數字輸入框的上下控制項 */
-        input[type="number"] {
-            -moz-appearance: textfield; /* Firefox */
-            -webkit-appearance: none; /* Safari and Chrome */
-            appearance: none;
-        }
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
         body {
             font-family: Arial, sans-serif;
             background: #9CD9DF;
@@ -35,65 +24,10 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin: 20px;
         }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .section {
-            margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .section-title {
-            font-weight: bold;
-            color: #FFFFFF;
-            margin-bottom: 10px;
-            font-size: 20px;
-            text-align: center;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .section:nth-of-type(1) {
-            background-color: #FFD1C1;
-        }
-        .section:nth-of-type(1) .section-title {
-            background-color: #e55347;
-        }
-        .section:nth-of-type(2) {
-            background-color: #FFD1C1;
-        }
-        .section:nth-of-type(2) .section-title {
-            background-color: #e55347;
-        }
-        .section:nth-of-type(3) {
-            background-color: #D9EAF7;
-        }
-        .section:nth-of-type(3) .section-title {
-            background-color: #5F97D1;
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-            font-weight: bold;
-            color: #333;
-        }
-        .input-group {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-        }
-        input[type="text"], input[type="number"], input[type="tel"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-            box-sizing: border-box;
+        .stock-button {
+            width: 150px; /* 設置按鈕的寬度 */
         }
         button {
-            width: 100%;
             padding: 12px;
             background-color: #4CAF50;
             color: white;
@@ -105,73 +39,30 @@
         button:hover {
             background-color: #45a049;
         }
-        .result {
-            margin-top: 20px;
-            text-align: center;
-            color: #333;
-            font-size: 16px;
-        }
-        .button-group {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        table {
-            font-size: 16px;
-        }
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 20px;
-            }
-            label, input, button {
-                font-size: 14px;
-            }
-            button {
-                padding: 10px;
-            }
-            .input-group {
-                flex-direction: column;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>有價證券信託-本金自益孳息他益試算器</h1>
-        <!-- 信託規劃基本資料 -->
-        <div class="section">
-            <div class="section-title">信託規劃基本資料</div>
-            <form id="trustForm">
-                <label for="clientName">客戶姓名</label>
-                <input type="text" id="clientName" name="clientName" placeholder="輸入客戶姓名" required>
 
-                <div class="input-group">
-                    <div style="flex: 1;">
-                        <label for="trustShares"><span style="color: red;">*</span> 交付信託張數</label>
-                        <input type="number" id="trustShares" name="trustShares" placeholder="輸入信託張數" required>
-                    </div>
-                    <div style="flex: 1;">
-                        <label for="trustYears"><span style="color: red;">*</span> 信託規劃年數</label>
-                        <input type="number" id="trustYears" name="trustYears" placeholder="輸入信託年數" required>
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <div style="flex: 1;">
-                        <label for="stockCode"><span style="color: red;">*</span> 交付股票代號</label>
-                        <input type="text" id="stockCode" name="stockCode" placeholder="輸入股票代號" required>
-                    </div>
-                    <div style="flex: 1;">
-                        <label for="stockPrice"><span style="color: red;">*</span> 股價</label>
-                        <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
-                    </div>
-                    <div>
-                        <label>&nbsp;</label>
-                        <button type="button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢股價</button>
-                    </div>
-                </div>
-            </form>
+        <div class="input-group">
+            <div style="flex: 1;">
+                <label for="stockCode"><span style="color: red;">*</span> 交付股票代號</label>
+                <input type="text" id="stockCode" name="stockCode" placeholder="輸入股票代號" required>
+            </div>
+            <div style="flex: 1;">
+                <label for="stockPrice"><span style="color: red;">*</span> 股價</label>
+                <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
+            </div>
+            <div>
+                <label>&nbsp;</label>
+                <button type="button" class="stock-button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢股價</button>
+            </div>
         </div>
+    </div>
+</body>
+</html>
+
 
         <!-- 預估未來股價、配股配息 -->
         <div class="section">
