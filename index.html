@@ -280,23 +280,23 @@
         // 显示结果
         const resultData = `
             <table style="width: 100%; border-collapse: collapse;">
-                <tr style="background-color: #5F97D1; color: #FFFFFF;">
-                    <td style="padding: 10px; font-weight: bold;">信託本金</td>
-                    <td style="padding: 10px;">${trustPrincipal.toLocaleString()} 元</td>
+                <tr style="background-color: #5F97D1;">
+                    <td style="padding: 15px; font-weight: bold; color: #FFFFFF;">信託本金</td>
+                    <td style="padding: 15px; text-align: right; color: #FFFFFF;">${trustPrincipal.toLocaleString()} 元</td>
                 </tr>
                 <tr style="background-color: #D9EAF7;">
-                    <td style="padding: 10px; font-weight: bold;">股利收入</td>
-                    <td style="padding: 10px;">${dividendIncome.toLocaleString()} 元</td>
+                    <td style="padding: 15px; font-weight: bold;">股利收入</td>
+                    <td style="padding: 15px; text-align: right;">${dividendIncome.toLocaleString()} 元</td>
                 </tr>
                 <tr style="background-color: #F5F5F5;">
-                    <td style="padding: 10px; font-weight: bold;">應繳贈與稅</td>
-                    <td style="padding: 10px;">${giftTax.toLocaleString()} 元</td>
+                    <td style="padding: 15px; font-weight: bold;">應繳贈與稅</td>
+                    <td style="padding: 15px; text-align: right;">${giftTax.toLocaleString()} 元</td>
                 </tr>
                 <tr style="background-color: #e55347; color: #FFFFFF;">
-                    <td colspan="2" style="padding: 15px; text-align: center; font-weight: bold;">最多可省下 ${maxTaxSavings.toLocaleString()} 元</td>
+                    <td colspan="2" style="padding: 20px; text-align: center; font-weight: bold;">最多可省下 ${maxTaxSavings.toLocaleString()} 元</td>
                 </tr>
             </table>
-            <div style="margin-top: 15px; padding: 10px; background-color: #FFF4E5; border-left: 5px solid #FFA500;">
+            <div style="margin-top: 15px; padding: 15px; background-color: #FFF4E5; border-left: 5px solid #FFA500;">
                 <p style="margin: 0; font-size: 14px; color: #333;">
                     <strong>!</strong> 贈與稅試算僅供參考，實際應繳稅額仍依據當年度個人贈與情況決定
                 </p>
@@ -304,6 +304,7 @@
         `;
         document.getElementById('result').innerHTML = `<h2>查詢結果</h2>${resultData}`;
     }
+
 
         function updateRetainedAndMaxShares() {
             const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
