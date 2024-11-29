@@ -266,13 +266,16 @@ function calculateResults() {
     // 计算信託本金
     const trustPrincipal = trustShares * 1000 * stockPrice;
 
-    // 计算股利收入
-    const dividendIncome = (Math.round(Math.floor((trustShares * 1000 * futureEarningsShares) / 10) * stockPrice) +
-                            Math.round(Math.floor(trustShares * 1000 * futureCashDividend))) * trustYears;
+    // 计算信託本金現值
+    const trustPrincipalPV = trustPrincipal / Math.pow(1 + 0.01725, trustYears);
 
-    // 计算應繳贈與稅 (E5 - F5)
-    const F5 = 2440000;
-    const E5 = trustPrincipal - trustPrincipal / Math.pow(1 + 0.01725, trustYears);
+    // 计算 E5
+    const E5 = trustPrincipal - trustPrincipalPV;
+
+    // 设定 F5
+    const F5 = 2400000;
+
+    // 计算應繳贈與稅
     let giftTax;
     if (E5 - F5 <= 25000000) {
         giftTax = (E5 - F5) * 0.1;
@@ -283,6 +286,10 @@ function calculateResults() {
     }
     giftTax = giftTax < 0 ? 0 : Math.round(giftTax); // 四捨五入到整數位
 
+    // 计算股利收入
+    const dividendIncome = (Math.round(Math.floor((trustShares * 1000 * futureEarningsShares) / 10) * stockPrice) +
+                            Math.round(Math.floor(trustShares * 1000 * futureCashDividend))) * trustYears;
+
     // 計算第一年節省贈與稅金額
     let firstYearTaxSavings;
     if (dividendIncome <= 25000000) {
@@ -292,6 +299,7 @@ function calculateResults() {
     } else {
         firstYearTaxSavings = dividendIncome * 0.2 - 3750000 - giftTax;
     }
+    firstYearTaxSavings = Math.max(0, firstYearTaxSavings); // 確保為正數或 0
 
     // 計算第二年以後節省贈與稅金額
     let subsequentYearsTaxSavings;
@@ -302,6 +310,7 @@ function calculateResults() {
     } else {
         subsequentYearsTaxSavings = (dividendIncome * 0.2 - 3750000) * (trustYears - 1);
     }
+    subsequentYearsTaxSavings = Math.max(0, subsequentYearsTaxSavings); // 確保為正數或 0
 
     // 計算總節省金額 (F38)
     const F38 = firstYearTaxSavings + subsequentYearsTaxSavings;
