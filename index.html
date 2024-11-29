@@ -262,6 +262,7 @@ function calculateResults() {
 
     const futureEarningsShares = parseFloat(document.getElementById('futureEarningsShares').value) || 0; // 預估未來盈餘配股
     const futureCashDividend = parseFloat(document.getElementById('futureCashDividend').value) || 0; // 預估未來現金股利
+    const futureStockPrice = parseFloat(document.getElementById('futureStockPrice').value) || 0; // 預估未來股價
 
     // 计算信託本金
     const trustPrincipal = trustShares * 1000 * stockPrice;
@@ -287,7 +288,7 @@ function calculateResults() {
     giftTax = giftTax < 0 ? 0 : Math.round(giftTax); // 四捨五入到整數位
 
     // 计算每年股利收入
-    const annualDividendIncome = Math.round(Math.floor(trustShares * 1000 * futureCashDividend));
+    const annualDividendIncome = Math.floor(trustShares * 1000 * futureEarningsShares / 10) * futureStockPrice + Math.floor(trustShares * 1000 * futureCashDividend);
 
     // 计算总股利收入
     const totalDividendIncome = annualDividendIncome * trustYears;
@@ -354,6 +355,7 @@ function calculateResults() {
         `;
     document.getElementById('result').innerHTML = `<h2>查詢結果</h2>${resultData}`;
 }
+
         function updateRetainedAndMaxShares() {
             const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
             const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
