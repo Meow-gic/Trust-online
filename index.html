@@ -286,31 +286,28 @@ function calculateResults() {
     }
     giftTax = giftTax < 0 ? 0 : Math.round(giftTax); // 四捨五入到整數位
 
-    // 计算股利收入
-    const dividendIncome = (Math.round(Math.floor((trustShares * 1000 * futureEarningsShares) / 10) * stockPrice) +
-                            Math.round(Math.floor(trustShares * 1000 * futureCashDividend))) * trustYears;
+    // 计算每年股利收入
+    const annualDividendIncome = Math.round(Math.floor(trustShares * 1000 * futureCashDividend));
 
-    // 計算第一年節省贈與稅金額
+    // 計算第一年節省贈與稅金額，不再判斷負數為 0
     let firstYearTaxSavings;
-    if (dividendIncome <= 25000000) {
-        firstYearTaxSavings = dividendIncome * 0.1 - giftTax;
-    } else if (dividendIncome <= 50000000) {
-        firstYearTaxSavings = dividendIncome * 0.15 - 1250000 - giftTax;
+    if (annualDividendIncome <= 25000000) {
+        firstYearTaxSavings = annualDividendIncome * 0.1 - giftTax;
+    } else if (annualDividendIncome <= 50000000) {
+        firstYearTaxSavings = annualDividendIncome * 0.15 - 1250000 - giftTax;
     } else {
-        firstYearTaxSavings = dividendIncome * 0.2 - 3750000 - giftTax;
+        firstYearTaxSavings = annualDividendIncome * 0.2 - 3750000 - giftTax;
     }
-    firstYearTaxSavings = Math.max(0, firstYearTaxSavings); // 確保為正數或 0
 
-    // 計算第二年以後節省贈與稅金額
+    // 計算第二年以後節省贈與稅金額，不再判斷負數為 0
     let subsequentYearsTaxSavings;
-    if (dividendIncome <= 25000000) {
-        subsequentYearsTaxSavings = dividendIncome * 0.1 * (trustYears - 1);
-    } else if (dividendIncome <= 50000000) {
-        subsequentYearsTaxSavings = (dividendIncome * 0.15 - 1250000) * (trustYears - 1);
+    if (annualDividendIncome <= 25000000) {
+        subsequentYearsTaxSavings = annualDividendIncome * 0.1 * (trustYears - 1);
+    } else if (annualDividendIncome <= 50000000) {
+        subsequentYearsTaxSavings = (annualDividendIncome * 0.15 - 1250000) * (trustYears - 1);
     } else {
-        subsequentYearsTaxSavings = (dividendIncome * 0.2 - 3750000) * (trustYears - 1);
+        subsequentYearsTaxSavings = (annualDividendIncome * 0.2 - 3750000) * (trustYears - 1);
     }
-    subsequentYearsTaxSavings = Math.max(0, subsequentYearsTaxSavings); // 確保為正數或 0
 
     // 計算總節省金額 (F38)
     const F38 = firstYearTaxSavings + subsequentYearsTaxSavings;
@@ -335,8 +332,8 @@ function calculateResults() {
                 <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${trustYears} 年</td>
             </tr>
             <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
-                <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">股利收入</td>
-                <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${dividendIncome.toLocaleString()} 元</td>
+                <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">每年股利收入</td>
+                <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${annualDividendIncome.toLocaleString()} 元</td>
             </tr>
             <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
                 <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">應繳贈與稅</td>
@@ -354,7 +351,6 @@ function calculateResults() {
         `;
     document.getElementById('result').innerHTML = `<h2>查詢結果</h2>${resultData}`;
 }
-
         function updateRetainedAndMaxShares() {
             const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
             const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
