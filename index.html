@@ -171,20 +171,23 @@
                     </div>
                 </div>
 
-            <div class="input-group" style="flex-direction: column;">
-                <div style="flex: 1;">
-                    <label for="stockCode"><span style="color: red;">*</span> 交付股票代號</label>
-                    <input type="number" id="stockCode" name="stockCode" placeholder="輸入股票代號" required>
-                </div>
-                <div class="input-group" style="flex: 1; margin-top: 10px; display: flex; align-items: center; gap: 10px;">
-                    <button type="button" class="stock-button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢股價</button>
-                    <label for="stockPrice" style="margin: 0;"><span style="color: red;">*</span> 股價</label>
-                    <div class="input-unit-wrapper">
-                        <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
-                        <span class="unit">元</span>
-                    </div>
-                </div>
+           <div class="input-group" style="flex-direction: column;">
+    <div style="flex: 1;">
+        <label for="stockCode"><span style="color: red;">*</span> 交付股票代號</label>
+        <input type="number" id="stockCode" name="stockCode" placeholder="輸入股票代號" required>
+    </div>
+    <div class="input-group" style="flex: 1; margin-top: 10px; display: flex; align-items: center;">
+        <button type="button" class="stock-button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')" style="margin-right: 10px;">查詢股價</button>
+        <div style="flex: 1;">
+            <label for="stockPrice" style="margin: 0;"><span style="color: red;">*</span> 股價</label>
+            <div class="input-unit-wrapper">
+                <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
+                <span class="unit">元</span>
             </div>
+        </div>
+    </div>
+</div>
+
 
 
         <!-- 預估未來股價、配股配息 -->
