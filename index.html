@@ -222,6 +222,32 @@
             </div>
         </div>
 
+        <!-- 內部人資訊 -->
+        <div class="section">
+            <div class="section-title">內部人資訊</div>
+            <div class="input-group">
+                <div style="flex: 1;">
+                    <label for="initialHolding">選任時持股</label>
+                    <input type="number" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required oninput="updateRetainedAndMaxShares()">
+                </div>
+                <div style="flex: 1;">
+                    <label for="retainedShares">應保留股數 (自動計算)</label>
+                    <input type="number" id="retainedShares" name="retainedShares" readonly>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div style="flex: 1;">
+                    <label for="currentHolding">目前持有股數</label>
+                    <input type="number" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required oninput="updateRetainedAndMaxShares()">
+                </div>
+                <div style="flex: 1;">
+                    <label for="maxAvailableShares">最多可承做股數 (自動計算)</label>
+                    <input type="number" id="maxAvailableShares" name="maxAvailableShares" readonly>
+                </div>
+            </div>
+        </div>
+
         <!-- 送出資料按鈕 -->
         <div class="button-group">
             <button type="button" onclick="validateAndCalculateResults()">送出資料</button>
@@ -345,6 +371,19 @@
                 </div>
             `;
             document.getElementById('result').innerHTML = `<h2>查詢結果</h2>${resultData}`;
+        }
+
+        function updateRetainedAndMaxShares() {
+            const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
+            const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
+
+            // 計算應保留股數，公式：IF(ISBLANK(I4), 0, ROUND(I4/2+1, 0))
+            const retainedShares = initialHolding ? Math.round(initialHolding / 2 + 1) : 0;
+            document.getElementById('retainedShares').value = retainedShares;
+
+            // 計算最多可承做股數，公式：IF(I8-I6<0, 0, I8-I6)
+            const maxAvailableShares = Math.max(0, currentHolding - retainedShares);
+            document.getElementById('maxAvailableShares').value = maxAvailableShares;
         }
     </script>
 </body>
