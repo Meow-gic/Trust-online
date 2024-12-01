@@ -171,7 +171,7 @@
                     </div>
                 </div>
 
-                  <div class="input-group" style="flex-direction: column;">
+                <div class="input-group" style="display: flex; align-items: center; gap: 10px;">
                     <div style="flex: 1;">
                         <label for="stockCode"><span style="color: red;">*</span> 交付股票代號</label>
                         <div class="input-unit-wrapper" style="display: flex; align-items: center; gap: 10px;">
@@ -179,14 +179,15 @@
                             <button type="button" class="stock-button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')" style="flex-shrink: 0;">查詢股價</button>
                         </div>
                     </div>
-                    <div style="flex: 1; margin-top: 10px;">
-                        <label for="stockPrice" style="display: block; text-align: left;"><span style="color: red;">*</span> 股價</label>
+                    <div style="flex: 1;">
+                        <label for="stockPrice" style="margin: 0;"><span style="color: red;">*</span> 股價</label>
                         <div class="input-unit-wrapper" style="display: flex; align-items: center;">
                             <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required style="width: 150px;">
                             <span class="unit" style="margin-left: 5px;">元</span>
                         </div>
                     </div>
                 </div>
+
 
             </form>
         </div>
