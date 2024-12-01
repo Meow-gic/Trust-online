@@ -230,32 +230,32 @@
     </div>
 
     <script>
-        function validateAndCalculateResults() {
-            // 檢查必填的欄位是否都有值
-            const requiredFields = [
-                { id: 'trustShares', name: '交付信託股票張數' },
-                { id: 'trustYears', name: '信託規劃年數 (至少３年)' },
-                { id: 'stockCode', name: '交付股票代號' },
-                { id: 'stockPrice', name: '股價' },
-                { id: 'futureStockPrice', name: '預估未來股價' },
-                { id: 'futureEarningsShares', name: '預估未來盈餘配股' },
-                { id: 'futureCashDividend', name: '預估未來現金股利' }
-            ];
+    function validateAndCalculateResults() {
+        // 檢查必填的欄位是否都有值
+        const requiredFields = [
+            { id: 'trustShares', name: '交付信託股票張數' },
+            { id: 'trustYears', name: '信託規劃年數 (至少3年)' },
+            { id: 'stockCode', name: '交付股票代號' },
+            { id: 'stockPrice', name: '股價' },
+            { id: 'futureStockPrice', name: '預估未來股價' },
+            { id: 'futureEarningsShares', name: '預估未來盈餘配股' },
+            { id: 'futureCashDividend', name: '預估未來現金股利' }
+        ];
 
-            for (let field of requiredFields) {
-                const value = document.getElementById(field.id).value;
-                if (!value) {
-                    alert(`請填寫 ${field.name}`);
-                    return; // 停止執行，直到所有欄位都有值
-                }
+        for (let field of requiredFields) {
+            const value = document.getElementById(field.id).value;
+            if (!value) {
+                alert(`請填寫 ${field.name}`);
+                return; // 停止執行，直到所有欄位都有值
             }
-
-            // 所有必填項目都有值，進行計算
-            calculateResults();
         }
 
+        // 所有必填項目都有值，進行計算
+        calculateResults();
+    }
+
 function calculateResults() {
-    // 收集用户输入的数据
+    // 收集用戶輸入的數據
     const trustShares = parseFloat(document.getElementById('trustShares').value) || 0; // 交付信託張數
     const trustYears = parseFloat(document.getElementById('trustYears').value) || 0; // 信託規劃年數
     const stockPrice = parseFloat(document.getElementById('stockPrice').value) || 0; // 股價
@@ -264,19 +264,19 @@ function calculateResults() {
     const futureCashDividend = parseFloat(document.getElementById('futureCashDividend').value) || 0; // 預估未來現金股利
     const futureStockPrice = parseFloat(document.getElementById('futureStockPrice').value) || 0; // 預估未來股價
 
-    // 计算信託本金
+    // 計算信託本金
     const trustPrincipal = trustShares * 1000 * stockPrice;
 
-    // 计算信託本金現值
+    // 計算信託本金現值
     const trustPrincipalPV = trustPrincipal / Math.pow(1 + 0.01725, trustYears);
 
-    // 计算 E5
+    // 計算 E5
     const E5 = trustPrincipal - trustPrincipalPV;
 
-    // 设定 F5
+    // 設定 F5
     const F5 = 2440000;
 
-    // 计算應繳贈與稅
+    // 計算應罵贈與稅
     let giftTax;
     if (E5 - F5 <= 25000000) {
         giftTax = (E5 - F5) * 0.1;
@@ -287,10 +287,10 @@ function calculateResults() {
     }
     giftTax = giftTax < 0 ? 0 : Math.round(giftTax); // 四捨五入到整數位
 
-    // 计算每年股利收入
+    // 計算每年股利收入
     const annualDividendIncome = Math.floor(trustShares * 1000 * futureEarningsShares / 10) * futureStockPrice + Math.floor(trustShares * 1000 * futureCashDividend);
 
-    // 计算总股利收入
+    // 計算總股利收入
     const totalDividendIncome = annualDividendIncome * trustYears;
 
     // 計算第一年節省贈與稅金額，不再判斷負數為 0
@@ -316,15 +316,15 @@ function calculateResults() {
     // 計算總節省金額 (F38)
     const F38 = firstYearTaxSavings + subsequentYearsTaxSavings;
 
-    // 計算最多可省下或應繳贈與稅的顯示值
+    // 計算最多可省下或應罵贈與稅的顯示值
     let maxTaxSavingsText;
     if (F38 > 0) {
         maxTaxSavingsText = `最多可省下 ${Math.round(F38).toLocaleString()} 元`;
     } else {
-        maxTaxSavingsText = `應繳贈與稅 ${Math.round(Math.abs(F38)).toLocaleString()} 元`;
+        maxTaxSavingsText = `應罵贈與稅 ${Math.round(Math.abs(F38)).toLocaleString()} 元`;
     }
 
-    // 显示结果
+    // 顯示結果
     const resultData = `
         <table style="width: 77%; margin: 0 auto; border-collapse: collapse; margin-top: 20px; border: 1px solid #D3D3D3;">
         <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
@@ -336,11 +336,11 @@ function calculateResults() {
                 <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${trustYears} 年</td>
             </tr>
             <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
-                <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">股利收入</td>
+                <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">預估股利收入</td>
                 <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${totalDividendIncome.toLocaleString()} 元</td>
             </tr>
             <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
-                <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">應繳贈與稅</td>
+                <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">成立信託應罵贈與稅</td>
                 <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${giftTax.toLocaleString()} 元</td>
             </tr>
             <tr style="background-color: #e55347; color: #FFFFFF;">
@@ -349,13 +349,12 @@ function calculateResults() {
             </table>
             <div style="margin-top: 15px; padding: 15px; background-color: #FFF4E5; border-left: 5px solid #FFA500; border-radius: 5px;">
                 <p style="margin: 0; font-size: 14px; color: #333;">
-                    <strong>!</strong> 贈與稅試算僅供參考，實際應繳稅額仍依據當年度個人贈與情況決定
+                    <strong>!</strong> 贈與稅試算僅供參考，實際應罵稅額仍依據當年度個人贈與情況決定
                 </p>
             </div>
         `;
     document.getElementById('result').innerHTML = `<h2>查詢結果</h2>${resultData}`;
 }
-
         function updateRetainedAndMaxShares() {
             const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
             const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
