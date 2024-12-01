@@ -144,50 +144,59 @@
                 <label for="clientName">客戶姓名</label>
                 <input type="text" id="clientName" name="clientName" placeholder="輸入客戶姓名" required>
 
-                <div class="input-group">
-                    <div style="flex: 1;">
-                        <label for="trustShares"><span style="color: red;">*</span> 交付信託股票張數</label>
+             <div class="input-group">
+                <div style="flex: 1;">
+                    <label for="trustShares"><span style="color: red;">*</span> 交付信託股票張數</label>
+                    <div style="display: flex; align-items: center;">
                         <input type="number" id="trustShares" name="trustShares" placeholder="輸入股票張數" required>
+                        <span style="margin-left: 5px;">張</span>
                     </div>
-                    <div style="flex: 1;">
-                        <label for="trustYears"><span style="color: red;">*</span> 信託規劃年數 (至少３年)</label>
+                </div>
+                <div style="flex: 1;">
+                    <label for="trustYears"><span style="color: red;">*</span> 信託規劃年數 (至少３年)</label>
+                    <div style="display: flex; align-items: center;">
                         <input type="number" id="trustYears" name="trustYears" placeholder="輸入信託年數" required>
+                        <span style="margin-left: 5px;">年</span>
                     </div>
                 </div>
-
-                <div class="input-group">
-                    <div style="flex: 1;">
-                        <label for="stockCode"><span style="color: red;">*</span> 交付股票代號</label>
-                        <input type="number" id="stockCode" name="stockCode" placeholder="輸入股票代號" required>
-                    </div>
-                    <div style="flex: 1;">
-                        <label for="stockPrice"><span style="color: red;">*</span> 股價</label>
+            </div>
+            
+            <div class="input-group">
+                <div style="flex: 1;">
+                    <label for="stockPrice"><span style="color: red;">*</span> 股價</label>
+                    <div style="display: flex; align-items: center;">
                         <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
-                    </div>
-                    <div style="text-align: center;">
-                        <label>&nbsp;</label>
-                        <button type="button" class="stock-button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢股價</button>
+                        <span style="margin-left: 5px;">元</span>
                     </div>
                 </div>
-            </form>
-        </div>
-
-        <div class="section">
-            <div class="section-title">預估未來股價、配股配息</div>
+                <div style="text-align: center;">
+                    <label>&nbsp;</label>
+                    <button type="button" class="stock-button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢股價</button>
+                </div>
+            </div>
+            
             <div class="input-group">
                 <div style="flex: 1;">
                     <label for="futureStockPrice"><span style="color: red;">*</span> 預估未來股價</label>
-                    <input type="number" id="futureStockPrice" name="futureStockPrice" placeholder="輸入預估未來股價" required>
+                    <div style="display: flex; align-items: center;">
+                        <input type="number" id="futureStockPrice" name="futureStockPrice" placeholder="輸入預估未來股價" required>
+                        <span style="margin-left: 5px;">元</span>
+                    </div>
                 </div>
                 <div style="flex: 1;">
                     <label for="futureEarningsShares"><span style="color: red;">*</span> 預估未來盈餘配股</label>
-                    <input type="number" id="futureEarningsShares" name="futureEarningsShares" placeholder="輸入預估盈餘配股" required>
+                    <div style="display: flex; align-items: center;">
+                        <input type="number" id="futureEarningsShares" name="futureEarningsShares" placeholder="輸入預估盈餘配股" required>
+                        <span style="margin-left: 5px;">元</span>
+                    </div>
                 </div>
                 <div style="flex: 1;">
                     <label for="futureCashDividend"><span style="color: red;">*</span> 預估未來現金股利</label>
-                    <input type="number" id="futureCashDividend" name="futureCashDividend" placeholder="輸入預估現金股利" required>
+                    <div style="display: flex; align-items: center;">
+                        <input type="number" id="futureCashDividend" name="futureCashDividend" placeholder="輸入預估現金股利" required>
+                        <span style="margin-left: 5px;">元</span>
+                    </div>
                 </div>
-            </div>
             <div style="width: 100%; text-align: left; margin-top: 10px; color: #555; font-size: 14px;">
                 ※假設辦理信託期間，每年配股、配息率維持相同。
             </div>
