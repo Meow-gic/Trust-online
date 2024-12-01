@@ -28,17 +28,20 @@
         }
         .container {
             width: 95%;
-            max-width: 800px;
+            max-width: 1200px;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /* 三个区域横向并排 */
+            gap: 20px;
         }
         .section {
-            margin-bottom: 20px;
             padding: 15px;
             border-radius: 5px;
+            background-color: #F2F2F2;
         }
         .section-title {
             font-weight: bold;
@@ -48,24 +51,7 @@
             text-align: center;
             padding: 10px;
             border-radius: 5px;
-        }
-        .section:nth-of-type(1) {
-            background-color: #F2F2F2;
-        }
-        .section:nth-of-type(1) .section-title {
             background-color: #e55347;
-        }
-        .section:nth-of-type(2) {
-            background-color: #F2F2F2;
-        }
-        .section:nth-of-type(2) .section-title {
-            background-color: #e55347;
-        }
-        .section:nth-of-type(3) {
-            background-color: #D9EAF7;
-        }
-        .section:nth-of-type(3) .section-title {
-            background-color: #267596;
         }
         label {
             display: block;
@@ -105,27 +91,26 @@
             font-size: 16px;
         }
         .stock-button {
-            width: 120px; /* 调整按鈕的宽度 */
+            width: 120px; /* 调整按钮的宽度 */
             flex: none; /* 确保按钮宽度不受父元素影响 */
         }
         button:hover {
             background-color: #45a049;
         }
-        .result {
-            margin-top: 20px;
-            text-align: center;
-            color: #333;
-            font-size: 16px;
-        }
-        .button-group {
+        .stock-info-group {
             display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
+            align-items: flex-start; /* 对齐到顶部 */
+            gap: 10px;
+            flex-wrap: wrap; /* 如果宽度不够，则换行 */
         }
-        table {
-            font-size: 16px;
+        .stock-info-item {
+            flex: 0 0 auto; /* 固定宽度，不随父容器变化 */
+            width: calc(33.333% - 10px); /* 确保三个元素均分可用空间 */
         }
         @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr; /* 在小屏幕上每个区域占满一行 */
+            }
             h1 {
                 font-size: 20px;
             }
@@ -139,24 +124,10 @@
                 flex-direction: column;
             }
         }
-        .stock-info-group {
-            display: flex;
-            align-items: flex-start; /* 对齐到顶部 */
-            gap: 10px;
-            flex-wrap: wrap; /* 如果宽度不够，则换行 */
-        }
-        .stock-info-item {
-            flex: 0 0 auto; /* 固定宽度，不随父容器变化 */
-            width: calc(33.333% - 10px); /* 确保三个元素均分可用空间 */
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>有價證券信託-本金自益孳息他益試算器</h1>
-        <p style="color: #000000; background-color: #F7ECDF; padding: 10px; font-size: 15px; border-radius: 5px; border-left: 5px solid #E4232C;">
-            ※ 本試算表的計算結果僅供參考
-        </p>
         <!-- 信託規劃基本資料 -->
         <div class="section">
             <div class="section-title">信託規劃基本資料</div>
@@ -200,8 +171,19 @@
                 </div>
             </form>
         </div>
-    </div>
 
+        <!-- 預估未來股價、配股配息 -->
+        <div class="section">
+            <div class="section-title">預估未來股價、配股配息</div>
+            <!-- 這部分可以放入相應的表單元素 -->
+        </div>
+
+        <!-- 內部人資訊 -->
+        <div class="section">
+            <div class="section-title">內部人資訊</div>
+            <!-- 這部分可以放入相應的表單元素 -->
+        </div>
+    </div>
 
         <!-- 預估未來股價、配股配息 -->
         <div class="section">
