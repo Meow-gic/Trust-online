@@ -171,18 +171,21 @@
                     </div>
                 </div>
 
-                <div class="input-group">
-                    <div style="flex: 1;">
-                        <label for="stockCode"><span style="color: red;">*</span> 交付股票代號</label>
-                        <input type="number" id="stockCode" name="stockCode" placeholder="輸入股票代號" required style="width: 150px;">
+               <div class="input-group">
+                <div style="flex: 1; display: flex; align-items: center; gap: 10px;">
+                    <label for="stockCode"><span style="color: red;">*</span> 交付股票代號</label>
+                    <input type="number" id="stockCode" name="stockCode" placeholder="輸入股票代號" required style="width: 150px;">
+                    <button type="button" class="stock-button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢股價</button>
+                </div>
+                <div style="flex: 1;">
+                    <label for="stockPrice"><span style="color: red;">*</span> 股價</label>
+                    <div class="input-unit-wrapper">
+                        <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
+                        <span class="unit">元</span>
                     </div>
-                    <div style="flex: 1;">
-                        <label for="stockPrice"><span style="color: red;">*</span> 股價</label>
-                        <div class="input-unit-wrapper">
-                            <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
-                            <span class="unit">元</span>
-                        </div>
-                    </div>
+                </div>
+            </div>
+
                     <div style="text-align: center;">
                         <label>&nbsp;</label>
                         <button type="button" class="stock-button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢股價</button>
