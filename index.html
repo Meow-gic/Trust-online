@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>有價證券信託-本金自益孳息他益試算器</title>
     <style>
-        /* 隱藏數字輸入框的上下控制項 */
         input[type="number"] {
-            -moz-appearance: textfield; /* Firefox */
-            -webkit-appearance: none; /* Safari and Chrome */
+            -moz-appearance: textfield;
+            -webkit-appearance: none;
             appearance: none;
         }
         input[type="number"]::-webkit-inner-spin-button,
@@ -78,7 +77,7 @@
             justify-content: space-between;
             gap: 10px;
         }
-        input[type="text"], input[type="number"], input[type="tel"] {
+        input[type="text"], input[type="number"] {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -97,8 +96,8 @@
             cursor: pointer;
             font-size: 16px;
         }
-         .stock-button {
-            width: 150px; /* 設置按鈕的寬度 */
+        .stock-button {
+            width: 150px;
         }
         button:hover {
             background-color: #45a049;
@@ -139,7 +138,6 @@
         <p style="color: #000000; background-color: #F7ECDF; padding: 10px; font-size: 15px; border-radius: 5px; border-left: 5px solid #E4232C;">
             ※ 本試算表的計算結果僅供參考
         </p>
-        <!-- 信託規劃基本資料 -->
         <div class="section">
             <div class="section-title">信託規劃基本資料</div>
             <form id="trustForm">
@@ -174,7 +172,6 @@
             </form>
         </div>
 
-        <!-- 預估未來股價、配股配息 -->
         <div class="section">
             <div class="section-title">預估未來股價、配股配息</div>
             <div class="input-group">
@@ -195,33 +192,7 @@
                 ※假設辦理信託期間，每年配股、配息率維持相同。
             </div>
         </div>
-        <!-- 內部人資訊 -->
-        <div class="section">
-            <div class="section-title">內部人資訊</div>
-            <div class="input-group">
-                <div style="flex: 1;">
-                    <label for="initialHolding">選任時持股</label>
-                    <input type="number" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required oninput="updateRetainedAndMaxShares()">
-                </div>
-                <div style="flex: 1;">
-                    <label for="retainedShares">應保留股數 (自動計算)</label>
-                    <input type="number" id="retainedShares" name="retainedShares" readonly>
-                </div>
-            </div>
 
-            <div class="input-group">
-                <div style="flex: 1;">
-                    <label for="currentHolding">目前持有股數</label>
-                    <input type="number" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required oninput="updateRetainedAndMaxShares()">
-                </div>
-                <div style="flex: 1;">
-                    <label for="maxAvailableShares">最多可承做股數 (自動計算)</label>
-                    <input type="number" id="maxAvailableShares" name="maxAvailableShares" readonly>
-                </div>
-            </div>
-        </div>
-
-        <!-- 送出資料按鈕 -->
         <div class="button-group">
             <button type="button" onclick="validateAndCalculateResults()">送出資料</button>
         </div>
@@ -231,7 +202,6 @@
 
     <script>
         function validateAndCalculateResults() {
-            // 檢查必填的欄位是否都有值
             const requiredFields = [
                 { id: 'trustShares', name: '交付信託股票張數' },
                 { id: 'trustYears', name: '信託規劃年數 (至少3年)' },
@@ -241,115 +211,91 @@
                 { id: 'futureEarningsShares', name: '預估未來盈餘配股' },
                 { id: 'futureCashDividend', name: '預估未來現金股利' }
             ];
-    
+
             for (let field of requiredFields) {
                 const value = document.getElementById(field.id).value;
                 if (!value) {
                     alert(`請填寫 ${field.name}`);
-                    return; // 停止執行，直到所有欄位都有值
+                    return;
                 }
             }
-    
-            // 所有必填項目都有值，進行計算
             calculateResults();
         }
-    
-    function calculateResults() {
-        // 收集用戶輸入的數據
-        const trustShares = parseFloat(document.getElementById('trustShares').value) || 0; // 交付信託張數
-        const trustYears = parseFloat(document.getElementById('trustYears').value) || 0; // 信託規劃年數
-        const stockPrice = parseFloat(document.getElementById('stockPrice').value) || 0; // 股價
-    
-        const futureEarningsShares = parseFloat(document.getElementById('futureEarningsShares').value) || 0; // 預估未來盈餘配股
-        const futureCashDividend = parseFloat(document.getElementById('futureCashDividend').value) || 0; // 預估未來現金股利
-        const futureStockPrice = parseFloat(document.getElementById('futureStockPrice').value) || 0; // 預估未來股價
-    
-        // 計算信託本金
-        const trustPrincipal = trustShares * 1000 * stockPrice;
-    
-        // 計算信託本金現值
-        const trustPrincipalPV = trustPrincipal / Math.pow(1 + 0.01725, trustYears);
-    
-        // 計算 E5
-        const E5 = trustPrincipal - trustPrincipalPV;
-    
-        // 設定 F5
-        const F5 = 2440000;
-    
-        // 計算應繳贈與稅
-        let giftTax;
-        if (E5 - F5 <= 25000000) {
-            giftTax = (E5 - F5) * 0.1;
-        } else if (E5 - F5 <= 50000000) {
-            giftTax = (E5 - F5) * 0.15 - 1250000;
-        } else {
-            giftTax = (E5 - F5) * 0.2 - 3750000;
-        }
-        giftTax = giftTax < 0 ? 0 : Math.round(giftTax); // 四捨五入到整數位
-    
-        // 計算每年股利收入
-        const annualDividendIncome = Math.floor(trustShares * 1000 * futureEarningsShares / 10) * futureStockPrice + Math.floor(trustShares * 1000 * futureCashDividend);
-    
-        // 計算總股利收入
-        const totalDividendIncome = annualDividendIncome * trustYears;
-    
-        // 計算第一年節省贈與稅金額，不再判斷負數為 0
-        let firstYearTaxSavings;
-        if (annualDividendIncome <= 25000000) {
-            firstYearTaxSavings = annualDividendIncome * 0.1 - giftTax;
-        } else if (annualDividendIncome <= 50000000) {
-            firstYearTaxSavings = annualDividendIncome * 0.15 - 1250000 - giftTax;
-        } else {
-            firstYearTaxSavings = annualDividendIncome * 0.2 - 3750000 - giftTax;
-        }
-    
-        // 計算第二年以後節省贈與稅金額，不再判斷負數為 0
-        let subsequentYearsTaxSavings;
-        if (annualDividendIncome <= 25000000) {
-            subsequentYearsTaxSavings = annualDividendIncome * 0.1 * (trustYears - 1);
-        } else if (annualDividendIncome <= 50000000) {
-            subsequentYearsTaxSavings = (annualDividendIncome * 0.15 - 1250000) * (trustYears - 1);
-        } else {
-            subsequentYearsTaxSavings = (annualDividendIncome * 0.2 - 3750000) * (trustYears - 1);
-        }
-    
-        // 計算總節省金額 (F38)
-        const F38 = firstYearTaxSavings + subsequentYearsTaxSavings;
-    
-        // 計算最多可省下贈與稅的顯示值
-        let maxTaxSavingsText;
-        if (F38 > 0) {
-            maxTaxSavingsText = `最多可省下 ${Math.round(F38).toLocaleString()} 元`;
-        } else if (F38 <= 0) {
-            maxTaxSavingsText = `最多可省下0元`;
-        } else {
-            maxTaxSavingsText = `應繳贈與稅 ${Math.round(Math.abs(F38)).toLocaleString()} 元`;
-        } 元`;
-        } else {
-            maxTaxSavingsText = `應繳贈與稅 ${Math.round(Math.abs(F38)).toLocaleString()} 元`;
-        }
-    
-        // 顯示結果
-        width: 100%; margin: 0 auto; border-collapse: collapse; margin-top: 20px; border: 1px solid #D3D3D3;">
-            <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
-                <td style="width: 45%; padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">信託本金</td>
-                <td style="width: 55%; padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${trustPrincipal.toLocaleString()} 元</td>
-            </tr>
-                <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
-                    <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">信託期間</td>
-                    <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${trustYears} 年</td>
-                </tr>
-                <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
-                    <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">預估股利收入</td>
-                    <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${totalDividendIncome.toLocaleString()} 元</td>
-                </tr>
-                <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
-                    <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">成立信託應繳贈與稅</td>
-                    <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${giftTax.toLocaleString()} 元</td>
-                </tr>
-                <tr style="background-color: #e55347; color: #FFFFFF;">
-                    <td colspan="2" style="padding: 15px; text-align: center; font-weight: bold;">${maxTaxSavingsText}</td>
-                </tr>
+
+        function calculateResults() {
+            const trustShares = parseFloat(document.getElementById('trustShares').value) || 0;
+            const trustYears = parseFloat(document.getElementById('trustYears').value) || 0;
+            const stockPrice = parseFloat(document.getElementById('stockPrice').value) || 0;
+            const futureEarningsShares = parseFloat(document.getElementById('futureEarningsShares').value) || 0;
+            const futureCashDividend = parseFloat(document.getElementById('futureCashDividend').value) || 0;
+            const futureStockPrice = parseFloat(document.getElementById('futureStockPrice').value) || 0;
+
+            const trustPrincipal = trustShares * 1000 * stockPrice;
+            const trustPrincipalPV = trustPrincipal / Math.pow(1 + 0.01725, trustYears);
+            const E5 = trustPrincipal - trustPrincipalPV;
+            const F5 = 2440000;
+
+            let giftTax;
+            if (E5 - F5 <= 25000000) {
+                giftTax = (E5 - F5) * 0.1;
+            } else if (E5 - F5 <= 50000000) {
+                giftTax = (E5 - F5) * 0.15 - 1250000;
+            } else {
+                giftTax = (E5 - F5) * 0.2 - 3750000;
+            }
+            giftTax = giftTax < 0 ? 0 : Math.round(giftTax);
+
+            const annualDividendIncome = Math.floor(trustShares * 1000 * futureEarningsShares / 10) * futureStockPrice + Math.floor(trustShares * 1000 * futureCashDividend);
+            const totalDividendIncome = annualDividendIncome * trustYears;
+
+            let firstYearTaxSavings;
+            if (annualDividendIncome <= 25000000) {
+                firstYearTaxSavings = annualDividendIncome * 0.1 - giftTax;
+            } else if (annualDividendIncome <= 50000000) {
+                firstYearTaxSavings = annualDividendIncome * 0.15 - 1250000 - giftTax;
+            } else {
+                firstYearTaxSavings = annualDividendIncome * 0.2 - 3750000 - giftTax;
+            }
+
+            let subsequentYearsTaxSavings;
+            if (annualDividendIncome <= 25000000) {
+                subsequentYearsTaxSavings = annualDividendIncome * 0.1 * (trustYears - 1);
+            } else if (annualDividendIncome <= 50000000) {
+                subsequentYearsTaxSavings = (annualDividendIncome * 0.15 - 1250000) * (trustYears - 1);
+            } else {
+                subsequentYearsTaxSavings = (annualDividendIncome * 0.2 - 3750000) * (trustYears - 1);
+            }
+
+            const F38 = firstYearTaxSavings + subsequentYearsTaxSavings;
+
+            let maxTaxSavingsText;
+            if (F38 > 0) {
+                maxTaxSavingsText = `最多可省下 ${Math.round(F38).toLocaleString()} 元`;
+            } else {
+                maxTaxSavingsText = `應繳贈與稅 ${Math.round(Math.abs(F38)).toLocaleString()} 元`;
+            }
+
+            const resultData = `
+                <table style="width: 100%; margin: 0 auto; border-collapse: collapse; margin-top: 20px; border: 1px solid #D3D3D3;">
+                    <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
+                        <td style="width: 45%; padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">信託本金</td>
+                        <td style="width: 55%; padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${trustPrincipal.toLocaleString()} 元</td>
+                    </tr>
+                    <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
+                        <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">信託期間</td>
+                        <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${trustYears} 年</td>
+                    </tr>
+                    <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
+                        <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">預估股利收入</td>
+                        <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${totalDividendIncome.toLocaleString()} 元</td>
+                    </tr>
+                    <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
+                        <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">成立信託應繳贈與稅</td>
+                        <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${giftTax.toLocaleString()} 元</td>
+                    </tr>
+                    <tr style="background-color: #e55347; color: #FFFFFF;">
+                        <td colspan="2" style="padding: 15px; text-align: center; font-weight: bold;">${maxTaxSavingsText}</td>
+                    </tr>
                 </table>
                 <div style="margin-top: 15px; padding: 15px; background-color: #FFF4E5; border-left: 5px solid #FFA500; border-radius: 5px;">
                     <p style="margin: 0; font-size: 14px; color: #333;">
@@ -357,19 +303,7 @@
                     </p>
                 </div>
             `;
-        document.getElementById('result').innerHTML = `<h2>查詢結果</h2>${resultData}`;
-    }
-        function updateRetainedAndMaxShares() {
-            const initialHolding = parseFloat(document.getElementById('initialHolding').value) || 0;
-            const currentHolding = parseFloat(document.getElementById('currentHolding').value) || 0;
-
-            // 计算应保留股数，公式：IF(ISBLANK(I4), 0, ROUND(I4/2+1, 0))
-            const retainedShares = initialHolding ? Math.round(initialHolding / 2 + 1) : 0;
-            document.getElementById('retainedShares').value = retainedShares;
-
-            // 计算最多可承做股数，公式：IF(I8-I6<0, 0, I8-I6)
-            const maxAvailableShares = Math.max(0, currentHolding - retainedShares);
-            document.getElementById('maxAvailableShares').value = maxAvailableShares;
+            document.getElementById('result').innerHTML = `<h2>查詢結果</h2>${resultData}`;
         }
     </script>
 </body>
