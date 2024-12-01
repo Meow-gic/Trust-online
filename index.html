@@ -316,12 +316,12 @@ function calculateResults() {
     // 計算總節省金額 (F38)
     const F38 = firstYearTaxSavings + subsequentYearsTaxSavings;
 
-    // 計算最多可省下或應罵贈與稅的顯示值
+    // 計算最多可省下贈與稅的顯示值
     let maxTaxSavingsText;
     if (F38 > 0) {
         maxTaxSavingsText = `最多可省下 ${Math.round(F38).toLocaleString()} 元`;
     } else {
-        maxTaxSavingsText = `應罵贈與稅 ${Math.round(Math.abs(F38)).toLocaleString()} 元`;
+        maxTaxSavingsText = `應繳贈與稅 ${Math.round(Math.abs(F38)).toLocaleString()} 元`;
     }
 
     // 顯示結果
@@ -340,7 +340,7 @@ function calculateResults() {
                 <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${totalDividendIncome.toLocaleString()} 元</td>
             </tr>
             <tr style="background-color: #F4EDDA; border-bottom: 1px solid #D3D3D3;">
-                <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">成立信託應罵贈與稅</td>
+                <td style="padding: 10px 15px; font-weight: bold; color: #333; text-align: left;">成立信託應繳贈與稅</td>
                 <td style="padding: 10px 15px; text-align: right; background-color: #FFFFFF; color: #333;">${giftTax.toLocaleString()} 元</td>
             </tr>
             <tr style="background-color: #e55347; color: #FFFFFF;">
