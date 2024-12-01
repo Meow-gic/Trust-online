@@ -272,8 +272,9 @@
             if (F38 > 0) {
                 maxTaxSavingsText = `最多可省下 ${Math.round(F38).toLocaleString()} 元`;
             } else {
-                maxTaxSavingsText = `最多可省下0元`;
+                maxTaxSavingsText = `<span style="font-size: larger;">$1</span>`;
             }
+
 
             const resultData = `
                 <table style="width: 100%; margin: 0 auto; border-collapse: collapse; margin-top: 20px; border: 1px solid #D3D3D3;">
