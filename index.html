@@ -139,16 +139,6 @@
                 flex-direction: column;
             }
         }
-
-        /* 新增类：用于左对齐红框部分的布局 */
-        .stock-input-group {
-            display: flex;
-            align-items: flex-start; /* 确保垂直对齐顶部 */
-            gap: 10px;
-        }
-        .stock-input-group > div {
-            flex: 0 0 auto; /* 确保每个输入框和按钮宽度固定，不随容器变化 */
-        }
     </style>
 </head>
 <body>
@@ -163,23 +153,6 @@
             <form id="trustForm">
                 <label for="clientName">客戶姓名</label>
                 <input type="text" id="clientName" name="clientName" placeholder="輸入客戶姓名" required>
-
-                <div class="input-group">
-                    <div style="flex: 1;">
-                        <label for="trustShares"><span style="color: red;">*</span> 交付信託股票張數</label>
-                        <div class="input-unit-wrapper">
-                            <input type="number" id="trustShares" name="trustShares" placeholder="輸入股票張數" required>
-                            <span class="unit">張</span>
-                        </div>
-                    </div>
-                    <div style="flex: 1;">
-                        <label for="trustYears"><span style="color: red;">*</span> 信託規劃年數 (至少３年)</label>
-                        <div class="input-unit-wrapper">
-                            <input type="number" id="trustYears" name="trustYears" placeholder="輸入信託年數" required>
-                            <span class="unit">年</span>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- 修改红框部分，使其左对齐 -->
                 <div class="stock-input-group">
@@ -200,19 +173,6 @@
                     </div>
                 </div>
             </form>
-        </div>
-    </div>
-
-        <!-- 預估未來股價、配股配息 -->
-        <div class="section">
-            <div class="section-title">預估未來股價、配股配息</div>
-            <!-- 這部分可以放入相應的表單元素 -->
-        </div>
-
-        <!-- 內部人資訊 -->
-        <div class="section">
-            <div class="section-title">內部人資訊</div>
-            <!-- 這部分可以放入相應的表單元素 -->
         </div>
     </div>
 
