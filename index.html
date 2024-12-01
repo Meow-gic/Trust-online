@@ -96,7 +96,6 @@
             color: #333;
         }
         button {
-            width: 100%;
             padding: 12px;
             background-color: #4CAF50;
             color: white;
@@ -106,7 +105,8 @@
             font-size: 16px;
         }
         .stock-button {
-            width: 150px; /* 設置按鈕的寬度 */
+            width: 120px; /* 调整按鈕的宽度 */
+            flex: none; /* 确保按钮宽度不受父元素影响 */
         }
         button:hover {
             background-color: #45a049;
@@ -141,14 +141,13 @@
         }
         .stock-info-group {
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* 对齐到顶部 */
             gap: 10px;
+            flex-wrap: wrap; /* 如果宽度不够，则换行 */
         }
         .stock-info-item {
-            flex: 1;
-        }
-        .stock-info-button {
-            flex: 0 0 auto;
+            flex: 0 0 auto; /* 固定宽度，不随父容器变化 */
+            width: calc(33.333% - 10px); /* 确保三个元素均分可用空间 */
         }
     </style>
 </head>
@@ -185,16 +184,16 @@
                 <div class="stock-info-group">
                     <div class="stock-info-item">
                         <label for="stockCode"><span style="color: red;">*</span> 交付股票代號</label>
-                        <input type="number" id="stockCode" name="stockCode" placeholder="輸入股票代號" required style="width: 100%;">
+                        <input type="number" id="stockCode" name="stockCode" placeholder="輸入股票代號" required>
                     </div>
                     <div class="stock-info-item">
                         <label for="stockPrice"><span style="color: red;">*</span> 股價</label>
                         <div class="input-unit-wrapper">
-                            <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required style="width: 100%;">
+                            <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
                             <span class="unit">元</span>
                         </div>
                     </div>
-                    <div class="stock-info-button">
+                    <div class="stock-info-item">
                         <label>&nbsp;</label>
                         <button type="button" class="stock-button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢股價</button>
                     </div>
