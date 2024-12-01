@@ -145,7 +145,7 @@
     <div class="container">
         <h1>有價證券信託-本金自益孳息他益試算器</h1>
         <p style="color: #000000; background-color: #F7ECDF; padding: 10px; font-size: 15px; border-radius: 5px; border-left: 5px solid #E4232C;">
-            ※ 本試算表的計算結果僅供參考
+            ※ 本試算表的計算結果僅供參考，實際應納稅額仍依據當年度個人贈與情況決定。
         </p>
         <!-- 信託規劃基本資料 -->
         <div class="section">
@@ -366,11 +366,6 @@
                         <td colspan="2" style="padding: 15px; text-align: center; font-weight: bold;">${maxTaxSavingsText}</td>
                     </tr>
                 </table>
-                <div style="margin-top: 15px; padding: 15px; background-color: #FFF4E5; border-left: 5px solid #FFA500; border-radius: 5px;">
-                    <p style="margin: 0; font-size: 14px; color: #333;">
-                        <strong>!</strong> 贈與稅試算僅供參考，實際應納稅額仍依據當年度個人贈與情況決定
-                    </p>
-                </div>
             `;
             document.getElementById('result').innerHTML = `<h2>查詢結果</h2>${resultData}`;
         }
