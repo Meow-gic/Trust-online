@@ -75,7 +75,7 @@
         }
         .input-group {
             display: flex;
-            justify-content: flex-start; /* 修改为向左对齐 */
+            justify-content: space-between;
             gap: 10px;
         }
         .input-unit-wrapper {
@@ -139,6 +139,17 @@
                 flex-direction: column;
             }
         }
+        .stock-info-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .stock-info-item {
+            flex: 1;
+        }
+        .stock-info-button {
+            flex: 0 0 auto;
+        }
     </style>
 </head>
 <body>
@@ -171,19 +182,19 @@
                     </div>
                 </div>
 
-                <div class="input-group">
-                    <div style="flex: 1;">
+                <div class="stock-info-group">
+                    <div class="stock-info-item">
                         <label for="stockCode"><span style="color: red;">*</span> 交付股票代號</label>
-                        <input type="number" id="stockCode" name="stockCode" placeholder="輸入股票代號" required style="width: 120px;">
+                        <input type="number" id="stockCode" name="stockCode" placeholder="輸入股票代號" required style="width: 100%;">
                     </div>
-                    <div style="flex: 1;">
+                    <div class="stock-info-item">
                         <label for="stockPrice"><span style="color: red;">*</span> 股價</label>
                         <div class="input-unit-wrapper">
-                            <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required style="width: 120px;">
+                            <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required style="width: 100%;">
                             <span class="unit">元</span>
                         </div>
                     </div>
-                    <div style="text-align: center;">
+                    <div class="stock-info-button">
                         <label>&nbsp;</label>
                         <button type="button" class="stock-button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢股價</button>
                     </div>
@@ -191,6 +202,7 @@
             </form>
         </div>
     </div>
+
 
         <!-- 預估未來股價、配股配息 -->
         <div class="section">
