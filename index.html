@@ -34,9 +34,11 @@
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin: 20px;
+            display: flex;
+            flex-direction: column; /* 垂直排列所有区块 */
+            gap: 20px; /* 在每个区块之间添加空隙 */
         }
         .section {
-            margin-bottom: 20px;
             padding: 15px;
             border-radius: 5px;
         }
@@ -118,7 +120,7 @@
         }
         .button-group {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             margin-top: 20px;
         }
         table {
@@ -202,8 +204,6 @@
                 </div>
             </form>
         </div>
-    </div>
-
 
         <!-- 預估未來股價、配股配息 -->
         <div class="section">
@@ -275,6 +275,7 @@
     </form>
 
     <script>
+        // JavaScript 部分保持不变
         function validateAndCalculateResults() {
             // 檢查必填的欄位是否都有值
             const requiredFields = [
