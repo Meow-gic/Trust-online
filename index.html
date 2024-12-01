@@ -154,27 +154,42 @@
                 <label for="clientName">客戶姓名</label>
                 <input type="text" id="clientName" name="clientName" placeholder="輸入客戶姓名" required>
 
-                <!-- 修改红框部分，使其左对齐 -->
-                <div class="stock-input-group">
-                    <div>
+                <div class="input-group">
+                    <div style="flex: 1;">
+                        <label for="trustShares"><span style="color: red;">*</span> 交付信託股票張數</label>
+                        <div class="input-unit-wrapper">
+                            <input type="number" id="trustShares" name="trustShares" placeholder="輸入股票張數" required>
+                            <span class="unit">張</span>
+                        </div>
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="trustYears"><span style="color: red;">*</span> 信託規劃年數 (至少３年)</label>
+                        <div class="input-unit-wrapper">
+                            <input type="number" id="trustYears" name="trustYears" placeholder="輸入信託年數" required>
+                            <span class="unit">年</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div style="flex: 1;">
                         <label for="stockCode"><span style="color: red;">*</span> 交付股票代號</label>
                         <input type="number" id="stockCode" name="stockCode" placeholder="輸入股票代號" required style="width: 150px;">
                     </div>
-                    <div>
+                    <div style="flex: 1;">
                         <label for="stockPrice"><span style="color: red;">*</span> 股價</label>
                         <div class="input-unit-wrapper">
                             <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
                             <span class="unit">元</span>
                         </div>
                     </div>
-                    <div>
+                    <div style="text-align: center;">
                         <label>&nbsp;</label>
                         <button type="button" class="stock-button" onclick="window.open('https://tw.stock.yahoo.com/', '_blank')">查詢股價</button>
                     </div>
                 </div>
             </form>
         </div>
-    </div>
 
         <!-- 預估未來股價、配股配息 -->
         <div class="section">
