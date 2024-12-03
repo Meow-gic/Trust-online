@@ -186,7 +186,7 @@
                     <label for="stockPrice" style="margin-bottom: 5px; display: block;"><span style="color: red;">*</span> 股價</label>
                     <div class="input-unit-wrapper" style="display: flex; align-items: center;">
                         <input type="number" id="stockPrice" name="stockPrice" placeholder="輸入股價" required>
-                        <span class="unit" style="margin-left: 5px;">元</span>
+                        <span class="unit" style="margin-left: 2px;">元</span>
                     </div>
                 </div>
             </div>
@@ -232,14 +232,14 @@
             <label for="initialHolding">選任時持股</label>
             <div class="input-unit-wrapper" style="display: flex; align-items: center;">
                 <input type="number" id="initialHolding" name="initialHolding" placeholder="輸入選任時持股" required oninput="updateRetainedAndMaxShares()" style="width: 100%;">
-                <span class="unit" style="margin-left: 3px;">股</span>
+                <span class="unit" style="margin-left: 2px;">股</span>
             </div>
         </div>
         <div style="flex: 1;">
             <label for="retainedShares">應保留股數 (自動計算)</label>
             <div class="input-unit-wrapper" style="display: flex; align-items: center;">
                 <input type="number" id="retainedShares" name="retainedShares" readonly style="width: 100%;">
-                <span class="unit" style="margin-left: 3px;">股</span>
+                <span class="unit" style="margin-left: 2px;">股</span>
             </div>
         </div>
     </div>
@@ -249,14 +249,14 @@
             <label for="currentHolding">目前持有股數</label>
             <div class="input-unit-wrapper" style="display: flex; align-items: center;">
                 <input type="number" id="currentHolding" name="currentHolding" placeholder="輸入目前持有股數" required oninput="updateRetainedAndMaxShares()" style="width: 100%;">
-                <span class="unit" style="margin-left: 3px;">股</span>
+                <span class="unit" style="margin-left: 2px;">股</span>
             </div>
         </div>
         <div style="flex: 1;">
             <label for="maxAvailableShares">最多可承做股數 (自動計算)</label>
             <div class="input-unit-wrapper" style="display: flex; align-items: center;">
                 <input type="number" id="maxAvailableShares" name="maxAvailableShares" readonly style="width: 100%;">
-                <span class="unit" style="margin-left: 3px;">股</span>
+                <span class="unit" style="margin-left: 2px;">股</span>
             </div>
         </div>
     </div>
