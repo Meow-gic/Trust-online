@@ -324,9 +324,9 @@
             if (E5 - F5 <= 28110000) {
                 giftTax = (E5 - F5) * 0.1;
             } else if (E5 - F5 <= 56210000) {
-                giftTax = (E5 - F5) * 0.15 - 2811000;
+                giftTax = (E5 - F5) * 0.15 - 1405500;
             } else {
-                giftTax = (E5 - F5) * 0.2 - 8432000;
+                giftTax = (E5 - F5) * 0.2 - 4216000;
             }
             giftTax = giftTax < 0 ? 0 : Math.round(giftTax);
 
@@ -341,11 +341,11 @@
                 firstYearTaxSavings = annualDividendIncome * 0.1 - giftTax;
                 subsequentYearsTaxSavings = annualDividendIncome * 0.1 * (trustYears - 1);
             } else if (annualDividendIncome <= 56210000) {
-                firstYearTaxSavings = annualDividendIncome * 0.15 - 2811000 - giftTax;
-                subsequentYearsTaxSavings = (annualDividendIncome * 0.15 - 2811000) * (trustYears - 1);
+                firstYearTaxSavings = annualDividendIncome * 0.15 - 1405500 - giftTax;
+                subsequentYearsTaxSavings = (annualDividendIncome * 0.15 - 1405500) * (trustYears - 1);
             } else {
-                firstYearTaxSavings = annualDividendIncome * 0.2 - 8432000 - giftTax;
-                subsequentYearsTaxSavings = (annualDividendIncome * 0.2 - 8432000) * (trustYears - 1);
+                firstYearTaxSavings = annualDividendIncome * 0.2 - 4216000 - giftTax;
+                subsequentYearsTaxSavings = (annualDividendIncome * 0.2 - 4216000) * (trustYears - 1);
             }
 
             const F38 = firstYearTaxSavings + subsequentYearsTaxSavings;
